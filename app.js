@@ -1037,7 +1037,7 @@ const appManager = {
       const answer = PORTFOLIO_DATA.askMeAnswers[key] || PORTFOLIO_DATA.askMeAnswers.default;
       const botMsg = document.createElement('div');
       botMsg.className = 'chat-bubble chat-bubble-bot';
-      botMsg.textContent = answer;
+      botMsg.innerHTML = parseMarkdown(answer);
       messagesContainer.appendChild(botMsg);
       this.scrollToBottom();
     }, 600);
@@ -1074,7 +1074,7 @@ const appManager = {
     const messagesContainer = document.getElementById('chat-messages-container');
     const botMsg = document.createElement('div');
     botMsg.className = 'chat-bubble chat-bubble-bot';
-    botMsg.textContent = PORTFOLIO_DATA.askMeAnswers[responseKey];
+    botMsg.innerHTML = parseMarkdown(PORTFOLIO_DATA.askMeAnswers[responseKey]);
     messagesContainer.appendChild(botMsg);
     this.scrollToBottom();
   },
@@ -1114,13 +1114,18 @@ const appManager = {
       // Mobile chat handlers
       const mobMessages = document.getElementById('mob-chat-messages');
       const mobChips = document.getElementById('mob-chat-chips');
-      const chips = ["About Sagar", "Core Skills", "Experience", "Projects", "Certifications"];
+      const chips = [
+        { text: "About Sagar", key: "about" },
+        { text: "Core Skills", key: "skills" },
+        { text: "Experience", key: "experience" },
+        { text: "Projects", key: "projects" },
+        { text: "Education", key: "education" },
+        { text: "Certifications", key: "certificates" }
+      ];
       
-      mobChips.innerHTML = chips.map(c => {
-        let key = c.toLowerCase().split(' ')[0];
-        if (key === 'core') key = 'skills';
-        return `<button class="chat-chip" onclick="appManager.simulateMobileChatResponse('${key}', '${c}')">${c}</button>`;
-      }).join('');
+      mobChips.innerHTML = chips.map(c => `
+        <button class="chat-chip" onclick="appManager.simulateMobileChatResponse('${c.key}', '${c.text}')">${c.text}</button>
+      `).join('');
 
       document.getElementById('mob-chat-form').addEventListener('submit', (e) => {
         e.preventDefault();
@@ -1159,7 +1164,7 @@ const appManager = {
           
           const botMsg = document.createElement('div');
           botMsg.className = 'chat-bubble chat-bubble-bot';
-          botMsg.textContent = PORTFOLIO_DATA.askMeAnswers[responseKey];
+          botMsg.innerHTML = parseMarkdown(PORTFOLIO_DATA.askMeAnswers[responseKey]);
           mobMessages.appendChild(botMsg);
           mobMessages.scrollTop = mobMessages.scrollHeight;
         }, 800);
@@ -1283,7 +1288,7 @@ const appManager = {
       typing.remove();
       const botMsg = document.createElement('div');
       botMsg.className = 'chat-bubble chat-bubble-bot';
-      botMsg.textContent = PORTFOLIO_DATA.askMeAnswers[key];
+      botMsg.innerHTML = parseMarkdown(PORTFOLIO_DATA.askMeAnswers[key]);
       mobMessages.appendChild(botMsg);
       mobMessages.scrollTop = mobMessages.scrollHeight;
     }, 600);
@@ -1392,3 +1397,9 @@ const appManager = {
     });
   }
 };
+
+// Helper: Parse Markdown bold syntax (**text** -> <strong>text</strong>)
+function parseMarkdown(text) {
+  if (!text) return '';
+  return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+}
