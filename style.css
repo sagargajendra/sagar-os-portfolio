@@ -70,6 +70,7 @@
 html, body {
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   font-family: var(--font-sans);
   color: var(--text-primary);
@@ -221,6 +222,7 @@ a:hover {
 .env-container {
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   position: absolute;
   top: 0;
   left: 0;
