@@ -182,7 +182,7 @@ function populateData() {
   appManager.renderChatChips();
 
   // 6. Recruiter Mode fields
-  document.getElementById('recruiter-about-text').textContent = PORTFOLIO_DATA.profile.summary;
+  document.getElementById('recruiter-about-text').innerHTML = PORTFOLIO_DATA.profile.summary + ' <span class="recruiter-action-arrow" onclick="appManager.handleRecruiterLink(\'about\')" title="Open About Candidate App">↗</span>';
   
   // Skills list in Recruiter
   const recruiterSkills = document.getElementById('recruiter-skills-container');
@@ -197,24 +197,29 @@ function populateData() {
 
   // Experience list in Recruiter
   const recruiterExp = document.getElementById('recruiter-experience-container');
-  recruiterExp.innerHTML = PORTFOLIO_DATA.experience.map(exp => `
-    <div class="recruiter-exp-item">
-      <div class="recruiter-exp-header">
-        <span class="recruiter-exp-role">${exp.role}</span>
-        <span class="recruiter-exp-dur">${exp.duration}</span>
+  recruiterExp.innerHTML = PORTFOLIO_DATA.experience.map(exp => {
+    const redirectAttr = (exp.redirectType && exp.redirectId)
+      ? `<span class="recruiter-action-arrow" onclick="appManager.handleRecruiterLink('${exp.redirectType}', '${exp.redirectId}')" title="View Related Details">↗</span>`
+      : '';
+    return `
+      <div class="recruiter-exp-item">
+        <div class="recruiter-exp-header">
+          <span class="recruiter-exp-role">${exp.role} ${redirectAttr}</span>
+          <span class="recruiter-exp-dur">${exp.duration}</span>
+        </div>
+        <div class="recruiter-exp-company">${exp.company}</div>
+        <ul class="recruiter-exp-highlights">
+          ${exp.highlights.map(h => `<li>${h}</li>`).join('')}
+        </ul>
       </div>
-      <div class="recruiter-exp-company">${exp.company}</div>
-      <ul class="recruiter-exp-highlights">
-        ${exp.highlights.map(h => `<li>${h}</li>`).join('')}
-      </ul>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 
   // Projects list in Recruiter
   const recruiterProj = document.getElementById('recruiter-projects-container');
   recruiterProj.innerHTML = PORTFOLIO_DATA.projects.map(proj => `
     <div class="recruiter-project-card">
-      <div class="recruiter-project-title">${proj.name} — ${proj.subtitle}</div>
+      <div class="recruiter-project-title">${proj.name} — ${proj.subtitle} <span class="recruiter-action-arrow" onclick="appManager.handleRecruiterLink('projects', '${proj.id}')" title="View Project Details">↗</span></div>
       <div class="recruiter-project-tech">Tech: ${proj.tech.join(', ')}</div>
       <p class="recruiter-project-desc">${proj.purpose}</p>
     </div>
@@ -225,7 +230,7 @@ function populateData() {
   if (recruiterTechEvents && PORTFOLIO_DATA.technicalEvents) {
     recruiterTechEvents.innerHTML = PORTFOLIO_DATA.technicalEvents.map(event => `
       <div class="recruiter-project-card">
-        <div class="recruiter-project-title">${event.name} — ${event.subtitle}</div>
+        <div class="recruiter-project-title">${event.name} — ${event.subtitle} <span class="recruiter-action-arrow" onclick="appManager.handleRecruiterLink('tech-events', '${event.id}')" title="View Event Details">↗</span></div>
         <div class="recruiter-project-tech">Tech: ${event.tech.join(', ')}</div>
         <p class="recruiter-project-desc">${event.purpose}</p>
       </div>
@@ -245,9 +250,12 @@ function populateData() {
   const recruiterCerts = document.getElementById('recruiter-certs-container');
   if (recruiterCerts) {
     recruiterCerts.innerHTML = PORTFOLIO_DATA.certificates.map(cert => `
-      <div class="recruiter-cert-item">
-        <span>${cert.category === 'technical' ? '🏆' : '🎗️'} ${cert.name}</span>
-        <span class="text-secondary">${cert.issuer} (${cert.date})</span>
+      <div class="recruiter-cert-item" style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <span>${cert.category === 'technical' ? '🏆' : '🎗️'} ${cert.name}</span>
+          <span class="text-secondary" style="margin-left: 8px;">${cert.issuer} (${cert.date})</span>
+        </div>
+        <span class="recruiter-action-arrow" onclick="appManager.handleRecruiterLink('certificates', '${cert.pdfUrl}')" title="View Certificate PDF">↗</span>
       </div>
     `).join('');
   }
@@ -1466,6 +1474,82 @@ const appManager = {
       }
     };
     return config[key] || null;
+  },
+
+  handleRecruiterLink(type, itemId = null) {
+    toggleRecruiterMode(false);
+    const isMob = isMobile();
+    if (type === 'about' || type === 'skills' || type === 'hobbies') {
+      if (isMob) {
+        document.getElementById('mobile-profile-summary').textContent = PORTFOLIO_DATA.profile.summary;
+        document.getElementById('mobile-profile-modal').classList.remove('hidden');
+      } else {
+        appManager.openWindow('about');
+      }
+    } else if (type === 'experience') {
+      appManager.previewPDF(PORTFOLIO_DATA.profile.resumeUrl, 'Sagar G Resume');
+    } else if (type === 'education') {
+      if (isMob) {
+        document.getElementById('mobile-profile-summary').textContent = PORTFOLIO_DATA.profile.summary;
+        document.getElementById('mobile-profile-modal').classList.remove('hidden');
+      } else {
+        appManager.openWindow('about');
+        setTimeout(() => {
+          const eduEl = document.querySelector('#win-about .timeline');
+          if (eduEl) {
+            eduEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 150);
+      }
+    } else if (type === 'projects') {
+      if (itemId) {
+        if (isMob) {
+          appManager.openMobileApp('projects');
+          setTimeout(() => {
+            const el = document.getElementById(`mob-proj-${itemId}`);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 300);
+        } else {
+          appManager.openWindow('projects');
+          appManager.selectProject(itemId);
+        }
+      } else {
+        if (isMob) {
+          appManager.openMobileApp('projects');
+        } else {
+          appManager.openWindow('projects');
+        }
+      }
+    } else if (type === 'tech-events') {
+      if (itemId) {
+        if (isMob) {
+          appManager.openMobileApp('technical-events');
+          setTimeout(() => {
+            const el = document.getElementById(`mob-proj-${itemId}`);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 300);
+        } else {
+          appManager.openWindow('tech-events');
+          appManager.selectTechnicalEvent(itemId);
+        }
+      } else {
+        if (isMob) {
+          appManager.openMobileApp('technical-events');
+        } else {
+          appManager.openWindow('tech-events');
+        }
+      }
+    } else if (type === 'certificates') {
+      if (itemId) {
+        appManager.previewPDF(itemId, 'Certificate Preview');
+      } else {
+        if (isMob) {
+          appManager.openMobileApp('certificates');
+        } else {
+          appManager.openWindow('certificates');
+        }
+      }
+    }
   },
 
   /* ==================== MOBILE MODE LOGIC ==================== */

@@ -52,16 +52,20 @@ const PORTFOLIO_DATA = {
         "Applied OOP principles to model a relational database schema in PostgreSQL supporting content feeds and multi-role interactions.",
         "Implemented JWT authentication and Role-Based Access Control (RBAC) via Supabase Row Level Security (RLS).",
         "Designed and debugged RESTful APIs with real-time subscriptions for live feeds, utilizing Git/GitHub for version control and peer code reviews."
-      ]
+      ],
+      redirectType: "projects",
+      redirectId: "ink-app"
     },
     {
       role: "Technical Head & Program Coordinator",
       company: "Kannada Sangha — St. Joseph's University",
-      duration: "Tech Head (24-25) & Prog Coord (25-26)",
+      duration: "Technical Head (2024-25) & Program Coordinator (2025-26)",
       highlights: [
         "Technical Head (2024 - 2025): Led AV production, live streaming, poster designing, and digital promotions for large campus events with 500+ students.",
         "Program Coordinator (2025 - 2026): Coordinated 8 Technical Heads for a 500+ participant, 20-event inter-college fest."
-      ]
+      ],
+      redirectType: "tech-events",
+      redirectId: "kannada-sangha"
     },
     {
       role: "Emcee & Volunteer",
@@ -71,7 +75,9 @@ const PORTFOLIO_DATA = {
         "Participated in the NSS Annual Rural Camp, engaging in community outreach and local development.",
         "Served as an emcee for small events in rural areas, interacting and communicating with local communities.",
         "Conducted hands-on physical field work, including cleaning roads and clearing drains."
-      ]
+      ],
+      redirectType: "certificates",
+      redirectId: "assets/Sagar G NSS Certificate.pdf"
     },
     {
       role: "Media Volunteer",
@@ -80,7 +86,9 @@ const PORTFOLIO_DATA = {
       highlights: [
         "Handled videography and editing for various inter- and intra-college events.",
         "Collaborated with the student council team to produce promotional media and capture key event highlights."
-      ]
+      ],
+      redirectType: "certificates",
+      redirectId: "assets/SJU Media Volunteer Certificate.pdf"
     }
   ],
   projects: [
@@ -364,31 +372,31 @@ const PORTFOLIO_DATA = {
   askMeAnswers: {
     greeting: "Hi there! I'm Sagar's virtual assistant. Ask me anything about his projects, skills, education, experience, or certifications, and I'll pull the facts directly from his resume! 🚀",
     default: "I'm not quite sure about that specific detail. Try asking me about my projects, skills, experience, or education! You can also click the suggestion chips below.",
-    
+
     about: "I am Sagar G, a Software Developer and B.Sc Computer Science & Mathematics graduate from St. Joseph's University, Bengaluru (Class of 2026). I specialize in Python and backend-oriented development, but I also have hands-on experience building mobile apps in Flutter. I love solving problems, writing clean code, and working on systems and APIs.",
-    
+
     projects: "I have worked on several notable projects:\n\n1. **INK App**: A role-based social media app with Flutter, Provider, Supabase, and PostgreSQL. It has 20+ screens and supports three distinct user roles with Row Level Security.\n2. **Cyber Crime in Urban Bengaluru**: An academic research paper mapping cyber threat patterns to CERT-In advisories and creating a taxonomy of 12 cybercrime typologies.\n3. **Flipkart Clone**: A responsive e-commerce front-end layout mimicking the UI and structural components of Flipkart.\n\nWhich one would you like to hear more about? (Type 'INK App', 'Research Paper', or 'Flipkart Clone')",
-    
+
     techEvents: "I have participated in various technical exhibitions, leadership roles, and campus/community activities:\n\n1. **Elixir 2.0 (Open Day)**: Exhibited the Automatic Ambulance Detection System prototype as part of a team of 8.\n2. **Elixir 3.0 (Open Day)**: Exhibited the Stickman Browser Game as part of a team of 7.\n3. **NSS Annual Rural Camp**: Acted as emcee for community events, executed drainage and road sanitation tasks, and engaged in public relations.\n4. **SJU Student Council Media Volunteer**: Directed and edited multi-fest recap videos and oversaw live campus coverage.\n5. **Kannada Sangha Technical Head & Coordinator**: Led AV production/live streaming for 500+ students and coordinated 8 Technical Heads for a 20-event inter-college fest.\n\nYou can view descriptions, attached certificates, and photos for all of these inside the **Technical Events & Activities Explorer**!",
-    
+
     skills: "My technical skills include:\n\n• **Languages**: Python, Java, C, C++, JavaScript, Dart\n• **Backend & DB**: PostgreSQL, Supabase, RESTful APIs, SQL, Row Level Security (RLS)\n• **Mobile & Frontend**: Flutter (Provider state management), Android, HTML5, CSS3, ES6+ JavaScript\n• **CS Concepts**: OOP, Data Structures & Algorithms, DBMS, Operating Systems, SDLC, Agile\n• **Tools**: Linux, Git, GitHub, Android Studio, VS Code",
-    
+
     experience: "I have hands-on experience across technical leadership, media production, and community outreach:\n\n1. **Academic Capstone Remote Intern (Eco Dispose)**: Collaborated in a team of 3 to ship the **INK App** (20+ screens, Flutter/Supabase). Handled schema design, RLS security, and real-time subscriptions.\n2. **Technical Head & Program Coordinator (Kannada Sangha)**: Coordinated live streaming, AV setup, and digital promos for events with 500+ attendees.\n3. **Media Volunteer (SJU Student Council, 2024)**: Handled videography and video editing for inter- and intra-college events.\n4. **NSS Volunteer**: Participated in the Annual Rural Camp, emceeing small community events and conducting manual field work (cleaning roads, drains).",
-    
+
     education: "My educational qualifications are:\n\n1. **B.Sc. in Mathematics & Computer Science** (2023 - 2026) from **St. Joseph's University, Bengaluru**.\n2. **Pre-University Course (PCMC)** (2020 - 2022) from **St. Francis Composite PU College, Bengaluru**.\n3. **SSLC** (2019 - 2020) from **New Bishop Cotton English High School, Bengaluru**.",
-    
+
     certificates: "I hold certifications across Technical and Extracurricular accomplishments:\n\n• **Technical & Internship**:\n  - Infosys Springboard: *Java for Beginners*, *Introduction to AI*, *Cyber Security Foundation*, and *Cybersecurity Awareness*.\n  - Eco Dispose: *Internship Capstone Letter*.\n• **Events & Activities**:\n  - National Service Scheme: *Sagar G NSS Certificate*.\n  - St. Joseph's University: *SJU Elixir 2.O Certificate* and *SJU Elixir 3.O Certificate*.\n  - SJU Student Council: *SJU Media Volunteer Certificate*.\n\nYou can view and download all of these in the **Files** or **Certificates** app on the desktop/launcher!",
-    
+
     looking_for: "I am currently looking for full-time Software Developer roles, particularly in backend development (Python/SQL/APIs) or mobile development (Flutter/Android). I am ready to start contributing from day one!",
-    
+
     recruiter_fit: "Why consider me?\n\n1. **Solid Foundation**: A degree in Mathematics & CS, bringing logical rigour to programming and database design.\n2. **Full Lifecycle Experience**: I have built and delivered a production-ready, 20+ screen app (INK App), managing everything from DB schemas to front-end state.\n3. **Self-Learner & Team Player**: Active hackathon participant, research publisher, student leader, and quick to pick up new tools (like Supabase, RLS, and AI-assisted development tools like Antigravity).",
 
     ink_app: "The **INK App** was built using Flutter, Dart, Supabase, and Provider. It's a role-based social media application that manages distinct access control for Admins, Brands, and Customers. I designed the PostgreSQL database schema, set up JWT-based authentication, and established Row Level Security (RLS) policies to make sure each role only sees their authorized data. It was presented to external faculty and praised for its technical execution.",
-    
+
     research: "My research paper, titled **\"Cyber Crime in Urban Bengaluru: Emerging Threats and Countermeasures\"**, analyzes cybercrime patterns (such as AI voice scams and UPI fraud) and maps them to CERT-In guidelines. I ran a survey, conducted statistical analyses to identify public security awareness gaps, and proposed strategic countermeasures.",
-    
+
     flipkart_clone: "The **Flipkart Clone** is a front-end practice project built completely with semantic HTML5 and vanilla CSS Flexbox and Grid layout systems. Key highlights include pixel-perfect responsive styling mimicking Flipkart's actual web page, a structured multi-category navbar, promotional banners, custom product lists, filter widgets, and navigation headers, with no external CSS framework.",
-    
+
     contact: "You can reach me via:\n• **Email**: sagarshadow111@gmail.com\n• **Phone**: +91 6361488259\n• **LinkedIn**: linkedin.com/in/sagargajendra\n• **GitHub**: github.com/sagargajendra\n\nFeel free to call or drop an email!"
   }
 };

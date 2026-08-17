@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sagar OS — Interactive Operating System Portfolio</title>
-  <meta name="description" content="Sagar G's interactive developer portfolio designed as a personal operating system. Features a mobile launcher and desktop OS experience.">
-  
+  <meta name="description"
+    content="Sagar G's interactive developer portfolio designed as a personal operating system. Features a mobile launcher and desktop OS experience.">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="dark-theme win-personality">
 
   <!-- Global Wallpaper Background -->
@@ -36,79 +41,118 @@
     <!-- Desktop Grid Icons -->
     <main class="desktop-grid" role="main">
       <button class="desktop-shortcut" id="shortcut-about" aria-label="About Sagar">
-        <svg viewBox="0 0 24 24" class="icon-svg color-blue"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        <svg viewBox="0 0 24 24" class="icon-svg color-blue">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+        </svg>
         <span class="shortcut-label">About Me</span>
       </button>
-      
+
       <button class="desktop-shortcut" id="shortcut-projects" aria-label="Projects">
-        <svg viewBox="0 0 24 24" class="icon-svg color-orange"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg>
+        <svg viewBox="0 0 24 24" class="icon-svg color-orange">
+          <path
+            d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z" />
+        </svg>
         <span class="shortcut-label">Projects</span>
       </button>
 
       <button class="desktop-shortcut" id="shortcut-tech-events" aria-label="Technical Events & Activities">
-        <svg viewBox="0 0 24 24" class="icon-svg color-emerald"><path d="M19 5h-2V3c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v2H5c-1.1 0-2 .9-2 2v13c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zM9 3h6v2H9V3zm10 17H5V7h14v13z"/></svg>
+        <svg viewBox="0 0 24 24" class="icon-svg color-emerald">
+          <path
+            d="M19 5h-2V3c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v2H5c-1.1 0-2 .9-2 2v13c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zM9 3h6v2H9V3zm10 17H5V7h14v13z" />
+        </svg>
         <span class="shortcut-label">Technical Events & Activities</span>
       </button>
 
       <button class="desktop-shortcut" id="shortcut-files" aria-label="File Explorer">
-        <svg viewBox="0 0 24 24" class="icon-svg color-yellow"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z"/></svg>
+        <svg viewBox="0 0 24 24" class="icon-svg color-yellow">
+          <path
+            d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z" />
+        </svg>
         <span class="shortcut-label">Files</span>
       </button>
 
       <button class="desktop-shortcut" id="shortcut-askme" aria-label="Ask Me Chatbot">
         <div class="shortcut-icon-wrapper pulse-glow">
-          <svg viewBox="0 0 24 24" class="icon-svg color-purple"><path d="M21.9 11.2C21.7 5.2 16.8.5 10.8.5 4.8.5.1 5.3.1 11.3c0 2.5 1 4.9 2.8 6.7L1.1 22.8c-.4.4-.1 1.1.5 1.1h15.9c5.2 0 9.4-4.2 9.4-9.4 0-1.2-.3-2.3-.9-3.3zM12 18H8v-2h4v2zm5-4H8v-2h9v2zm0-4H8V8h9v2z"/></svg>
+          <svg viewBox="0 0 24 24" class="icon-svg color-purple">
+            <path
+              d="M21.9 11.2C21.7 5.2 16.8.5 10.8.5 4.8.5.1 5.3.1 11.3c0 2.5 1 4.9 2.8 6.7L1.1 22.8c-.4.4-.1 1.1.5 1.1h15.9c5.2 0 9.4-4.2 9.4-9.4 0-1.2-.3-2.3-.9-3.3zM12 18H8v-2h4v2zm5-4H8v-2h9v2zm0-4H8V8h9v2z" />
+          </svg>
         </div>
         <span class="shortcut-label">Ask Me AI</span>
       </button>
 
       <button class="desktop-shortcut" id="shortcut-certificates" aria-label="Certificates">
-        <svg viewBox="0 0 24 24" class="icon-svg color-teal"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 15l-4-4 1.41-1.41L10 13.17l5.59-5.59L17 9l-7 7z"/></svg>
+        <svg viewBox="0 0 24 24" class="icon-svg color-teal">
+          <path
+            d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 15l-4-4 1.41-1.41L10 13.17l5.59-5.59L17 9l-7 7z" />
+        </svg>
         <span class="shortcut-label">Certificates</span>
       </button>
 
       <button class="desktop-shortcut" id="shortcut-creative" aria-label="Creative Corner">
-        <svg viewBox="0 0 24 24" class="icon-svg color-pink"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.07 19.58 10.48 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm1 13h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
+        <svg viewBox="0 0 24 24" class="icon-svg color-pink">
+          <path
+            d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.07 19.58 10.48 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm1 13h-2v-2h2v2zm0-4h-2V7h2v5z" />
+        </svg>
         <span class="shortcut-label">Creative</span>
       </button>
 
       <button class="desktop-shortcut" id="shortcut-recruiter" aria-label="Recruiter Mode">
         <div class="shortcut-icon-wrapper highlight-glow">
-          <svg viewBox="0 0 24 24" class="icon-svg color-emerald"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+          <svg viewBox="0 0 24 24" class="icon-svg color-emerald">
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z" />
+          </svg>
         </div>
         <span class="shortcut-label">Recruiter Mode</span>
       </button>
 
       <button class="desktop-shortcut" id="shortcut-resume" aria-label="Download Resume">
-        <svg viewBox="0 0 24 24" class="icon-svg color-red"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        <svg viewBox="0 0 24 24" class="icon-svg color-red">
+          <path
+            d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+        </svg>
         <span class="shortcut-label">Resume PDF</span>
       </button>
 
 
       <button class="desktop-shortcut" id="shortcut-linkedin" aria-label="LinkedIn Profile">
-        <svg viewBox="0 0 24 24" class="icon-svg color-blue"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+        <svg viewBox="0 0 24 24" class="icon-svg color-blue">
+          <path
+            d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+        </svg>
         <span class="shortcut-label">LinkedIn</span>
       </button>
 
       <button class="desktop-shortcut" id="shortcut-github" aria-label="GitHub Profile">
-        <svg viewBox="0 0 24 24" class="icon-svg color-purple"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+        <svg viewBox="0 0 24 24" class="icon-svg color-purple">
+          <path
+            d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+        </svg>
         <span class="shortcut-label">GitHub</span>
       </button>
 
       <button class="desktop-shortcut" id="shortcut-location" aria-label="Open Location in Maps">
-        <svg viewBox="0 0 24 24" class="icon-svg color-red"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <svg viewBox="0 0 24 24" class="icon-svg color-red">
+          <path
+            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+        </svg>
         <span class="shortcut-label">Location</span>
       </button>
     </main>
 
     <!-- Draggable Desktop Windows Container -->
     <div id="windows-container">
-      
+
       <!-- WINDOW: ABOUT ME -->
-      <div id="win-about" class="window window-resizable hidden" style="width: 680px; height: 480px; top: 10%; left: 20%;">
+      <div id="win-about" class="window window-resizable hidden"
+        style="width: 680px; height: 480px; top: 10%; left: 20%;">
         <div class="window-header">
           <div class="window-title-area">
-            <svg viewBox="0 0 24 24" class="window-header-icon color-blue"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            <svg viewBox="0 0 24 24" class="window-header-icon color-blue">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+            </svg>
             <span class="window-title">About Me — Sagar G</span>
           </div>
           <div class="window-controls">
@@ -148,7 +192,9 @@
                 <h3>Interests & Extracurriculars</h3>
                 <p><strong>Languages:</strong> English, Kannada, Hindi</p>
                 <p><strong>Interests:</strong> Video Editing, Content Creation, Tech Blogging</p>
-                <p>Served as the <strong>Technical Head & Program Coordinator</strong> for Kannada Sangha at St. Joseph's University, leading a team of 8 heads for events with 500+ participants and managing AV production.</p>
+                <p>Served as the <strong>Technical Head & Program Coordinator</strong> for Kannada Sangha at St.
+                  Joseph's University, leading a team of 8 heads for events with 500+ participants and managing AV
+                  production.</p>
               </section>
             </div>
           </div>
@@ -156,10 +202,14 @@
       </div>
 
       <!-- WINDOW: PROJECTS -->
-      <div id="win-projects" class="window window-resizable hidden" style="width: 760px; height: 520px; top: 12%; left: 24%;">
+      <div id="win-projects" class="window window-resizable hidden"
+        style="width: 760px; height: 520px; top: 12%; left: 24%;">
         <div class="window-header">
           <div class="window-title-area">
-            <svg viewBox="0 0 24 24" class="window-header-icon color-orange"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg>
+            <svg viewBox="0 0 24 24" class="window-header-icon color-orange">
+              <path
+                d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z" />
+            </svg>
             <span class="window-title">Projects Explorer</span>
           </div>
           <div class="window-controls">
@@ -181,10 +231,14 @@
       </div>
 
       <!-- WINDOW: TECHNICAL EVENTS -->
-      <div id="win-tech-events" class="window window-resizable hidden" style="width: 760px; height: 520px; top: 14%; left: 26%;">
+      <div id="win-tech-events" class="window window-resizable hidden"
+        style="width: 760px; height: 520px; top: 14%; left: 26%;">
         <div class="window-header">
           <div class="window-title-area">
-            <svg viewBox="0 0 24 24" class="window-header-icon color-emerald"><path d="M19 5h-2V3c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v2H5c-1.1 0-2 .9-2 2v13c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zM9 3h6v2H9V3zm10 17H5V7h14v13z"/></svg>
+            <svg viewBox="0 0 24 24" class="window-header-icon color-emerald">
+              <path
+                d="M19 5h-2V3c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v2H5c-1.1 0-2 .9-2 2v13c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zM9 3h6v2H9V3zm10 17H5V7h14v13z" />
+            </svg>
             <span class="window-title">Technical Events & Activities Explorer</span>
           </div>
           <div class="window-controls">
@@ -206,10 +260,14 @@
       </div>
 
       <!-- WINDOW: FILES -->
-      <div id="win-files" class="window window-resizable hidden" style="width: 720px; height: 460px; top: 15%; left: 22%;">
+      <div id="win-files" class="window window-resizable hidden"
+        style="width: 720px; height: 460px; top: 15%; left: 22%;">
         <div class="window-header">
           <div class="window-title-area">
-            <svg viewBox="0 0 24 24" class="window-header-icon color-yellow"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z"/></svg>
+            <svg viewBox="0 0 24 24" class="window-header-icon color-yellow">
+              <path
+                d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z" />
+            </svg>
             <span class="window-title">File Manager</span>
           </div>
           <div class="window-controls">
@@ -239,10 +297,14 @@
       </div>
 
       <!-- WINDOW: ASK ME AI -->
-      <div id="win-askme" class="window window-resizable hidden" style="width: 580px; height: 500px; top: 8%; left: 30%;">
+      <div id="win-askme" class="window window-resizable hidden"
+        style="width: 580px; height: 500px; top: 8%; left: 30%;">
         <div class="window-header">
           <div class="window-title-area">
-            <svg viewBox="0 0 24 24" class="window-header-icon color-purple"><path d="M21.9 11.2C21.7 5.2 16.8.5 10.8.5 4.8.5.1 5.3.1 11.3c0 2.5 1 4.9 2.8 6.7L1.1 22.8c-.4.4-.1 1.1.5 1.1h15.9c5.2 0 9.4-4.2 9.4-9.4 0-1.2-.3-2.3-.9-3.3zM12 18H8v-2h4v2zm5-4H8v-2h9v2zm0-4H8V8h9v2z"/></svg>
+            <svg viewBox="0 0 24 24" class="window-header-icon color-purple">
+              <path
+                d="M21.9 11.2C21.7 5.2 16.8.5 10.8.5 4.8.5.1 5.3.1 11.3c0 2.5 1 4.9 2.8 6.7L1.1 22.8c-.4.4-.1 1.1.5 1.1h15.9c5.2 0 9.4-4.2 9.4-9.4 0-1.2-.3-2.3-.9-3.3zM12 18H8v-2h4v2zm5-4H8v-2h9v2zm0-4H8V8h9v2z" />
+            </svg>
             <span class="window-title">Ask Me — Interactive Assistant</span>
           </div>
           <div class="window-controls">
@@ -269,9 +331,12 @@
           </div>
           <div class="chat-input-area">
             <form id="chat-form" class="chat-form-element">
-              <input type="text" id="chat-input-text" placeholder="Type a question (e.g. skills, experience)..." autocomplete="off" aria-label="Chat query text">
+              <input type="text" id="chat-input-text" placeholder="Type a question (e.g. skills, experience)..."
+                autocomplete="off" aria-label="Chat query text">
               <button type="submit" class="btn btn-primary" aria-label="Send message">
-                <svg viewBox="0 0 24 24" class="send-svg"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                <svg viewBox="0 0 24 24" class="send-svg">
+                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                </svg>
               </button>
             </form>
           </div>
@@ -279,10 +344,14 @@
       </div>
 
       <!-- WINDOW: CERTIFICATES -->
-      <div id="win-certificates" class="window window-resizable hidden" style="width: 600px; height: 420px; top: 18%; left: 28%;">
+      <div id="win-certificates" class="window window-resizable hidden"
+        style="width: 600px; height: 420px; top: 18%; left: 28%;">
         <div class="window-header">
           <div class="window-title-area">
-            <svg viewBox="0 0 24 24" class="window-header-icon color-teal"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 15l-4-4 1.41-1.41L10 13.17l5.59-5.59L17 9l-7 7z"/></svg>
+            <svg viewBox="0 0 24 24" class="window-header-icon color-teal">
+              <path
+                d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 15l-4-4 1.41-1.41L10 13.17l5.59-5.59L17 9l-7 7z" />
+            </svg>
             <span class="window-title">Certifications List</span>
           </div>
           <div class="window-controls">
@@ -300,10 +369,14 @@
       </div>
 
       <!-- WINDOW: CREATIVE CORNER -->
-      <div id="win-creative" class="window window-resizable hidden" style="width: 640px; height: 450px; top: 20%; left: 25%;">
+      <div id="win-creative" class="window window-resizable hidden"
+        style="width: 640px; height: 450px; top: 20%; left: 25%;">
         <div class="window-header">
           <div class="window-title-area">
-            <svg viewBox="0 0 24 24" class="window-header-icon color-pink"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.07 19.58 10.48 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm1 13h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
+            <svg viewBox="0 0 24 24" class="window-header-icon color-pink">
+              <path
+                d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.07 19.58 10.48 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm1 13h-2v-2h2v2zm0-4h-2V7h2v5z" />
+            </svg>
             <span class="window-title">Creative Workspace</span>
           </div>
           <div class="window-controls">
@@ -314,38 +387,47 @@
         </div>
         <div class="window-body creative-layout p-4">
           <h3 class="section-title">Creative Work, Video Editing & Content Creation</h3>
-          <p class="mb-4 text-secondary">Apart from development, Sagar is passionate about video production and content design. Here are his creative highlights:</p>
-          
+          <p class="mb-4 text-secondary">Apart from development, Sagar is passionate about video production and content
+            design. Here are his creative highlights:</p>
+
           <div class="creative-grid">
             <div class="creative-card">
               <div class="creative-icon">🎬</div>
               <h4>Video Editing & AV Production</h4>
-              <p>Experienced in editing, post-production, and directing visual streams. Served as an SJU Student Council Media Volunteer (2024), handling videography and editing for inter- and intra-college events.</p>
+              <p>Experienced in editing, post-production, and directing visual streams. Served as an SJU Student Council
+                Media Volunteer (2024), handling videography and editing for inter- and intra-college events.</p>
             </div>
             <div class="creative-card">
               <div class="creative-icon">📢</div>
               <h4>Digital Promotions</h4>
-              <p>Designed and ran digital campaigns, posters, and outreach materials for St. Joseph's Kannada Sangha.</p>
+              <p>Designed and ran digital campaigns, posters, and outreach materials for St. Joseph's Kannada Sangha.
+              </p>
             </div>
             <div class="creative-card">
               <div class="creative-icon">🎤</div>
               <h4>NSS Community Outreach & Emcee</h4>
-              <p>Served as an emcee for small community events in rural areas, interacted with local residents, and completed hands-on sanitation and infrastructure field work (cleaning roads, drains).</p>
+              <p>Served as an emcee for small community events in rural areas, interacted with local residents, and
+                completed hands-on sanitation and infrastructure field work (cleaning roads, drains).</p>
             </div>
             <div class="creative-card">
               <div class="creative-icon">🔊</div>
               <h4>Live Stream Engineering</h4>
-              <p>Designed live stream setups (OBS, audio mixing, multi-cam switching) for events with over 500 participants.</p>
+              <p>Designed live stream setups (OBS, audio mixing, multi-cam switching) for events with over 500
+                participants.</p>
             </div>
           </div>
         </div>
       </div>
 
       <!-- WINDOW: SETTINGS -->
-      <div id="win-settings" class="window window-resizable hidden" style="width: 500px; height: 380px; top: 22%; left: 32%;">
+      <div id="win-settings" class="window window-resizable hidden"
+        style="width: 500px; height: 380px; top: 22%; left: 32%;">
         <div class="window-header">
           <div class="window-title-area">
-            <svg viewBox="0 0 24 24" class="window-header-icon color-gray"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+            <svg viewBox="0 0 24 24" class="window-header-icon color-gray">
+              <path
+                d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+            </svg>
             <span class="window-title">Settings & Personalization</span>
           </div>
           <div class="window-controls">
@@ -380,7 +462,8 @@
           <div class="settings-section">
             <h4>About SAGAR OS</h4>
             <p class="text-secondary">Version 1.0.0 (Build 2026.08)</p>
-            <p class="text-secondary">Powered by HTML5, CSS3, and Vanilla JavaScript. Made with Google Antigravity.</p>
+            <p class="text-secondary">Powered by HTML5, CSS3, and Vanilla JavaScript. Made with Google Antigravity by
+              Sagar G</p>
           </div>
         </div>
       </div>
@@ -392,7 +475,10 @@
     <div id="desktop-taskbar">
       <!-- Start Button for Windows, or Menu for Mac/Linux -->
       <button id="taskbar-start" aria-label="Start menu">
-        <svg viewBox="0 0 24 24" class="start-logo"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        <svg viewBox="0 0 24 24" class="start-logo">
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+        </svg>
         <span class="start-text">SAGAR OS</span>
       </button>
 
@@ -403,13 +489,14 @@
 
       <!-- System Clock Area -->
       <div id="taskbar-system-tray">
-        <button class="tray-icon" id="tray-recruiter-shortcut" aria-label="Recruiter dashboard shortcut">👔 Recruiter Mode</button>
+        <button class="tray-icon" id="tray-recruiter-shortcut" aria-label="Recruiter dashboard shortcut">👔 Recruiter
+          Mode</button>
         <div id="system-clock-display" class="tray-clock">
           12:00 PM
         </div>
       </div>
     </div>
-    
+
     <!-- Start Menu Overlay (Windows inspired) -->
     <div id="start-menu" class="hidden">
       <div class="start-user-profile">
@@ -422,7 +509,8 @@
       <div class="start-links-grid">
         <button class="start-menu-item" onclick="appManager.openWindow('about')">👤 About Me</button>
         <button class="start-menu-item" onclick="appManager.openWindow('projects')">💻 Projects</button>
-        <button class="start-menu-item" onclick="appManager.openWindow('tech-events')">🏆 Technical Events & Activities</button>
+        <button class="start-menu-item" onclick="appManager.openWindow('tech-events')">🏆 Technical Events &
+          Activities</button>
         <button class="start-menu-item" onclick="appManager.openWindow('files')">📁 Files Manager</button>
         <button class="start-menu-item" onclick="appManager.openWindow('askme')">🤖 Ask Me Assistant</button>
         <button class="start-menu-item" onclick="appManager.openWindow('certificates')">🏆 Certificates</button>
@@ -436,7 +524,7 @@
 
   <!-- ==================== MOBILE ENVIRONMENT ==================== -->
   <div id="mobile-env" class="env-container">
-    
+
     <!-- Mobile Status Bar -->
     <div class="mobile-status-bar">
       <div class="status-bar-left">
@@ -450,7 +538,7 @@
 
     <!-- Mobile Launcher Main -->
     <div class="mobile-launcher-container">
-      
+
       <!-- Photo/Profile Widget -->
       <div class="mobile-widget" id="mobile-profile-widget" role="button" aria-label="Open profile card">
         <div class="widget-avatar-wrapper">
@@ -467,66 +555,93 @@
 
       <!-- Mobile App Grid -->
       <div class="mobile-apps-grid">
-        
+
         <button class="mobile-app-icon" id="mobile-app-askme" aria-label="Ask Me Chatbot">
           <div class="mobile-app-img pulse-glow">
-            <svg viewBox="0 0 24 24" class="icon-svg color-purple"><path d="M21.9 11.2C21.7 5.2 16.8.5 10.8.5 4.8.5.1 5.3.1 11.3c0 2.5 1 4.9 2.8 6.7L1.1 22.8c-.4.4-.1 1.1.5 1.1h15.9c5.2 0 9.4-4.2 9.4-9.4 0-1.2-.3-2.3-.9-3.3zM12 18H8v-2h4v2zm5-4H8v-2h9v2zm0-4H8V8h9v2z"/></svg>
+            <svg viewBox="0 0 24 24" class="icon-svg color-purple">
+              <path
+                d="M21.9 11.2C21.7 5.2 16.8.5 10.8.5 4.8.5.1 5.3.1 11.3c0 2.5 1 4.9 2.8 6.7L1.1 22.8c-.4.4-.1 1.1.5 1.1h15.9c5.2 0 9.4-4.2 9.4-9.4 0-1.2-.3-2.3-.9-3.3zM12 18H8v-2h4v2zm5-4H8v-2h9v2zm0-4H8V8h9v2z" />
+            </svg>
           </div>
           <span class="mobile-app-label">Ask Me AI</span>
         </button>
-        
+
         <button class="mobile-app-icon" id="mobile-app-projects" aria-label="Projects">
           <div class="mobile-app-img">
-            <svg viewBox="0 0 24 24" class="icon-svg color-orange"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg>
+            <svg viewBox="0 0 24 24" class="icon-svg color-orange">
+              <path
+                d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z" />
+            </svg>
           </div>
           <span class="mobile-app-label">Projects</span>
         </button>
 
         <button class="mobile-app-icon" id="mobile-app-tech-events" aria-label="Technical Events & Activities">
           <div class="mobile-app-img">
-            <svg viewBox="0 0 24 24" class="icon-svg color-emerald"><path d="M19 5h-2V3c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v2H5c-1.1 0-2 .9-2 2v13c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zM9 3h6v2H9V3zm10 17H5V7h14v13z"/></svg>
+            <svg viewBox="0 0 24 24" class="icon-svg color-emerald">
+              <path
+                d="M19 5h-2V3c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v2H5c-1.1 0-2 .9-2 2v13c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zM9 3h6v2H9V3zm10 17H5V7h14v13z" />
+            </svg>
           </div>
           <span class="mobile-app-label">Exhibitions</span>
         </button>
 
         <button class="mobile-app-icon" id="mobile-app-files" aria-label="File Explorer">
           <div class="mobile-app-img">
-            <svg viewBox="0 0 24 24" class="icon-svg color-yellow"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z"/></svg>
+            <svg viewBox="0 0 24 24" class="icon-svg color-yellow">
+              <path
+                d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6 10H6v-2h8v2zm4-4H6v-2h12v2z" />
+            </svg>
           </div>
           <span class="mobile-app-label">Files</span>
         </button>
 
         <button class="mobile-app-icon" id="mobile-app-certificates" aria-label="Certificates">
           <div class="mobile-app-img">
-            <svg viewBox="0 0 24 24" class="icon-svg color-teal"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 15l-4-4 1.41-1.41L10 13.17l5.59-5.59L17 9l-7 7z"/></svg>
+            <svg viewBox="0 0 24 24" class="icon-svg color-teal">
+              <path
+                d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 15l-4-4 1.41-1.41L10 13.17l5.59-5.59L17 9l-7 7z" />
+            </svg>
           </div>
           <span class="mobile-app-label">Certificates</span>
         </button>
 
         <button class="mobile-app-icon" id="mobile-app-creative" aria-label="Creative Corners">
           <div class="mobile-app-img">
-            <svg viewBox="0 0 24 24" class="icon-svg color-pink"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.07 19.58 10.48 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm1 13h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
+            <svg viewBox="0 0 24 24" class="icon-svg color-pink">
+              <path
+                d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.07 19.58 10.48 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm1 13h-2v-2h2v2zm0-4h-2V7h2v5z" />
+            </svg>
           </div>
           <span class="mobile-app-label">Creative</span>
         </button>
 
         <button class="mobile-app-icon" id="mobile-app-recruiter" aria-label="Recruiter Mode">
           <div class="mobile-app-img highlight-glow">
-            <svg viewBox="0 0 24 24" class="icon-svg color-emerald"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+            <svg viewBox="0 0 24 24" class="icon-svg color-emerald">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z" />
+            </svg>
           </div>
           <span class="mobile-app-label">Recruiter</span>
         </button>
 
         <button class="mobile-app-icon" id="mobile-app-location" aria-label="Open Location in Maps">
           <div class="mobile-app-img">
-            <svg viewBox="0 0 24 24" class="icon-svg color-blue"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <svg viewBox="0 0 24 24" class="icon-svg color-blue">
+              <path
+                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+            </svg>
           </div>
           <span class="mobile-app-label">Location</span>
         </button>
 
         <button class="mobile-app-icon" id="mobile-app-settings" aria-label="Mobile Settings">
           <div class="mobile-app-img">
-            <svg viewBox="0 0 24 24" class="icon-svg color-gray"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+            <svg viewBox="0 0 24 24" class="icon-svg color-gray">
+              <path
+                d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+            </svg>
           </div>
           <span class="mobile-app-label">Settings</span>
         </button>
@@ -534,14 +649,20 @@
 
         <button class="mobile-app-icon" id="mobile-app-linkedin" aria-label="LinkedIn Profile">
           <div class="mobile-app-img">
-            <svg viewBox="0 0 24 24" class="icon-svg color-blue"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+            <svg viewBox="0 0 24 24" class="icon-svg color-blue">
+              <path
+                d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+            </svg>
           </div>
           <span class="mobile-app-label">LinkedIn</span>
         </button>
 
         <button class="mobile-app-icon" id="mobile-app-github" aria-label="GitHub Profile">
           <div class="mobile-app-img">
-            <svg viewBox="0 0 24 24" class="icon-svg color-purple"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+            <svg viewBox="0 0 24 24" class="icon-svg color-purple">
+              <path
+                d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+            </svg>
           </div>
           <span class="mobile-app-label">GitHub</span>
         </button>
@@ -551,16 +672,27 @@
       <!-- Mobile Bottom Dock (Recruiter Fast Access) -->
       <div class="mobile-bottom-dock">
         <button class="mobile-dock-btn" id="mobile-dock-phone" aria-label="Call Sagar">
-          <svg viewBox="0 0 24 24" class="dock-svg color-green"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          <svg viewBox="0 0 24 24" class="dock-svg color-green">
+            <path
+              d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+          </svg>
         </button>
         <button class="mobile-dock-btn" id="mobile-dock-askme" aria-label="Ask Me Chatbot">
-          <svg viewBox="0 0 24 24" class="dock-svg color-purple"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+          <svg viewBox="0 0 24 24" class="dock-svg color-purple">
+            <path
+              d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z" />
+          </svg>
         </button>
         <button class="mobile-dock-btn" id="mobile-dock-files" aria-label="Files">
-          <svg viewBox="0 0 24 24" class="dock-svg color-yellow"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+          <svg viewBox="0 0 24 24" class="dock-svg color-yellow">
+            <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z" />
+          </svg>
         </button>
         <button class="mobile-dock-btn" id="mobile-dock-email" aria-label="Email Sagar">
-          <svg viewBox="0 0 24 24" class="dock-svg color-red"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <svg viewBox="0 0 24 24" class="dock-svg color-red">
+            <path
+              d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+          </svg>
         </button>
       </div>
     </div>
@@ -569,7 +701,9 @@
     <div id="mobile-app-overlay" class="hidden">
       <div class="mobile-app-header">
         <button class="mobile-app-back-btn" id="mobile-app-back" aria-label="Back to home">
-          <svg viewBox="0 0 24 24" class="back-svg"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+          <svg viewBox="0 0 24 24" class="back-svg">
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+          </svg>
         </button>
         <h2 id="mobile-app-title">Application</h2>
       </div>
@@ -591,7 +725,7 @@
           ✕ Close Dashboard
         </button>
       </header>
-      
+
       <div class="recruiter-grid-layout">
         <!-- Sidebar Profile -->
         <aside class="recruiter-aside">
@@ -602,11 +736,14 @@
             <p class="recruiter-loc">📍 Bengaluru, Karnataka</p>
             <div class="recruiter-contact-actions">
               <a href="tel:+916361488259" class="btn btn-primary btn-block text-center mb-2">📞 Call Sagar</a>
-              <a href="mailto:sagarshadow111@gmail.com" class="btn btn-secondary btn-block text-center mb-2">📧 Email Sagar</a>
-              <a href="assets/Sagar_G_Resume.pdf" download="Sagar_G_Resume.pdf" class="btn btn-accent btn-block text-center mb-3">📄 Download Resume</a>
+              <a href="mailto:sagarshadow111@gmail.com" class="btn btn-secondary btn-block text-center mb-2">📧 Email
+                Sagar</a>
+              <a href="assets/Sagar_G_Resume.pdf" download="Sagar_G_Resume.pdf"
+                class="btn btn-accent btn-block text-center mb-3">📄 Download Resume</a>
             </div>
             <div class="recruiter-social-links">
-              <a href="https://linkedin.com/in/sagargajendra" target="_blank" rel="noopener" class="social-link">LinkedIn ↗</a>
+              <a href="https://linkedin.com/in/sagargajendra" target="_blank" rel="noopener"
+                class="social-link">LinkedIn ↗</a>
               <a href="https://github.com/sagargajendra" target="_blank" rel="noopener" class="social-link">GitHub ↗</a>
             </div>
           </div>
@@ -615,7 +752,8 @@
         <!-- Main Stats -->
         <main class="recruiter-main">
           <section class="recruiter-section">
-            <h3>About Candidate</h3>
+            <h3>About Candidate <span class="recruiter-action-arrow" onclick="appManager.handleRecruiterLink('about')"
+                title="Open About Candidate App">↗</span></h3>
             <p id="recruiter-about-text"></p>
           </section>
 
@@ -634,28 +772,32 @@
           </section>
 
           <section class="recruiter-section">
-            <h3>Key Projects</h3>
+            <h3>Key Projects <span class="recruiter-action-arrow" onclick="appManager.handleRecruiterLink('projects')"
+                title="Open Projects Explorer">↗</span></h3>
             <div class="recruiter-projects-list" id="recruiter-projects-container">
               <!-- Rendered dynamically -->
             </div>
           </section>
 
           <section class="recruiter-section">
-            <h3>Work & Internship Experience</h3>
+            <h3>Work & Internship Experience <span class="recruiter-action-arrow" onclick="appManager.handleRecruiterLink('experience')" title="View Resume PDF">↗</span></h3>
             <div class="recruiter-experience-list" id="recruiter-experience-container">
               <!-- Rendered dynamically -->
             </div>
           </section>
 
           <section class="recruiter-section">
-            <h3>Technical Exhibitions (Open Day)</h3>
+            <h3>Technical Exhibitions (Open Day) <span class="recruiter-action-arrow"
+                onclick="appManager.handleRecruiterLink('tech-events')" title="Open Technical Events Explorer">↗</span>
+            </h3>
             <div class="recruiter-projects-list" id="recruiter-tech-events-container">
               <!-- Rendered dynamically -->
             </div>
           </section>
 
           <section class="recruiter-section">
-            <h3>Certifications</h3>
+            <h3>Certifications <span class="recruiter-action-arrow"
+                onclick="appManager.handleRecruiterLink('certificates')" title="Open Certificates App">↗</span></h3>
             <div class="recruiter-certs-list" id="recruiter-certs-container">
               <!-- Rendered dynamically -->
             </div>
@@ -665,7 +807,10 @@
             <h3>Hobbies & Interests</h3>
             <p><strong>Languages:</strong> English, Kannada, Hindi</p>
             <p><strong>Interests:</strong> Video Editing, Content Creation, Tech Blogging</p>
-            <p>Served as the <strong>Technical Head & Program Coordinator</strong> for Kannada Sangha at St. Joseph's University, leading a team of 8 heads for events with 500+ participants and managing AV production.</p>
+            <p>Served as the <strong>Technical Head & Program Coordinator</strong> for Kannada Sangha at St. Joseph's
+              University, leading a team of 8 heads for events with 500+ participants and managing AV production. <span
+                class="recruiter-action-arrow" onclick="appManager.handleRecruiterLink('tech-events', 'kannada-sangha')"
+                title="View Kannada Sangha Event Details">↗</span></p>
           </section>
         </main>
       </div>
@@ -685,7 +830,8 @@
       <div class="pdf-modal-body">
         <!-- Fallback if iframe fails to load -->
         <div class="pdf-fallback-text hidden" id="pdf-viewer-fallback">
-          Unable to display document preview inline. Please <a href="#" id="pdf-fallback-link" download>click here to download</a>.
+          Unable to display document preview inline. Please <a href="#" id="pdf-fallback-link" download>click here to
+            download</a>.
         </div>
         <iframe src="" id="pdf-viewer-frame" title="PDF Document Frame" width="100%" height="100%"></iframe>
         <img src="" id="pdf-viewer-img" class="pdf-viewer-image" alt="Document Preview Image" />
@@ -694,7 +840,8 @@
   </div>
 
   <!-- ==================== MOBILE PROFILE EXPAND MODAL ==================== -->
-  <div id="mobile-profile-modal" class="modal-overlay hidden" aria-modal="true" role="dialog" aria-label="Sagar G Profile Details">
+  <div id="mobile-profile-modal" class="modal-overlay hidden" aria-modal="true" role="dialog"
+    aria-label="Sagar G Profile Details">
     <div class="mobile-profile-card-container">
       <button class="mobile-profile-close-btn" id="mobile-profile-close" aria-label="Close Profile Details">✕</button>
       <div class="mobile-profile-hero">
@@ -732,7 +879,8 @@
   </div>
 
   <!-- ==================== IMAGE LIGHTBOX MODAL ==================== -->
-  <div id="image-lightbox-modal" class="modal-overlay hidden" aria-modal="true" role="dialog" aria-label="Fullscreen Image Viewer">
+  <div id="image-lightbox-modal" class="modal-overlay hidden" aria-modal="true" role="dialog"
+    aria-label="Fullscreen Image Viewer">
     <button class="image-lightbox-close-btn" id="lightbox-close-btn" aria-label="Close View">✕</button>
     <img id="image-lightbox-src" src="" alt="Fullscreen Profile Picture" class="image-lightbox-content">
   </div>
@@ -741,4 +889,5 @@
   <script src="data.js"></script>
   <script src="app.js"></script>
 </body>
+
 </html>
