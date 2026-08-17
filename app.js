@@ -105,7 +105,7 @@ function populateData() {
   // 2. Projects Explorer List
   const projList = document.getElementById('projects-sidebar-list');
   projList.innerHTML = PORTFOLIO_DATA.projects.map((proj, idx) => `
-    <button class="project-nav-item ${idx === 0 ? 'active' : ''}" onclick="appManager.selectProject('${proj.id}')">
+    <button class="project-nav-item ${idx === 0 ? 'active' : ''}" data-id="${proj.id}" onclick="appManager.selectProject('${proj.id}')">
       <span class="project-nav-name">${proj.name}</span>
       <span class="project-nav-tech">${proj.tech.slice(0, 3).join(' • ')}</span>
     </button>
@@ -116,20 +116,59 @@ function populateData() {
     appManager.selectProject(PORTFOLIO_DATA.projects[0].id);
   }
 
+  // 2b. Technical Events Explorer List
+  const techEventsList = document.getElementById('tech-events-sidebar-list');
+  if (techEventsList && PORTFOLIO_DATA.technicalEvents) {
+    techEventsList.innerHTML = PORTFOLIO_DATA.technicalEvents.map((event, idx) => `
+      <button class="project-nav-item ${idx === 0 ? 'active' : ''}" data-id="${event.id}" onclick="appManager.selectTechnicalEvent('${event.id}')">
+        <span class="project-nav-name">${event.name}</span>
+        <span class="project-nav-tech">${event.tech.slice(0, 3).join(' • ')}</span>
+      </button>
+    `).join('');
+    
+    // Load initial technical event details
+    if (PORTFOLIO_DATA.technicalEvents.length > 0) {
+      appManager.selectTechnicalEvent(PORTFOLIO_DATA.technicalEvents[0].id);
+    }
+  }
+
   // 3. Certificates viewer
   const certContainer = document.getElementById('cert-list-container');
-  certContainer.innerHTML = PORTFOLIO_DATA.certificates.map(cert => `
-    <div class="cert-row">
-      <div class="cert-info">
-        <span class="cert-icon">🏆</span>
-        <div>
-          <div class="cert-name">${cert.name}</div>
-          <div class="cert-issuer">${cert.issuer} (${cert.date})</div>
+  if (certContainer) {
+    const techCerts = PORTFOLIO_DATA.certificates.filter(c => c.category === 'technical');
+    const eventCerts = PORTFOLIO_DATA.certificates.filter(c => c.category === 'events');
+
+    let html = `
+      <div class="cert-section-header" style="font-weight:700; margin:5px 0 10px 0; color:var(--color-teal); border-bottom:1px solid var(--border-color); padding-bottom:4px; font-size:12px;">Technical & Internship Certificates</div>
+      ${techCerts.map(cert => `
+        <div class="cert-row">
+          <div class="cert-info">
+            <span class="cert-icon">🏆</span>
+            <div>
+              <div class="cert-name">${cert.name}</div>
+              <div class="cert-issuer">${cert.issuer} (${cert.date})</div>
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="appManager.previewPDF('${cert.pdfUrl}', '${cert.name}')">View</button>
         </div>
-      </div>
-      <button class="btn btn-secondary btn-sm" onclick="appManager.previewPDF('${cert.pdfUrl}', '${cert.name}')">View</button>
-    </div>
-  `).join('');
+      `).join('')}
+
+      <div class="cert-section-header" style="font-weight:700; margin:20px 0 10px 0; color:var(--color-emerald); border-bottom:1px solid var(--border-color); padding-bottom:4px; font-size:12px;">Events & Activities Certificates</div>
+      ${eventCerts.map(cert => `
+        <div class="cert-row">
+          <div class="cert-info">
+            <span class="cert-icon">🎗️</span>
+            <div>
+              <div class="cert-name">${cert.name}</div>
+              <div class="cert-issuer">${cert.issuer} (${cert.date})</div>
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="appManager.previewPDF('${cert.pdfUrl}', '${cert.name}')">View</button>
+        </div>
+      `).join('')}
+    `;
+    certContainer.innerHTML = html;
+  }
 
   // 4. File Manager
   appManager.renderFileManagerFolder('root');
@@ -180,6 +219,18 @@ function populateData() {
     </div>
   `).join('');
 
+  // Technical Events list in Recruiter
+  const recruiterTechEvents = document.getElementById('recruiter-tech-events-container');
+  if (recruiterTechEvents && PORTFOLIO_DATA.technicalEvents) {
+    recruiterTechEvents.innerHTML = PORTFOLIO_DATA.technicalEvents.map(event => `
+      <div class="recruiter-project-card">
+        <div class="recruiter-project-title">${event.name} — ${event.subtitle}</div>
+        <div class="recruiter-project-tech">Tech: ${event.tech.join(', ')}</div>
+        <p class="recruiter-project-desc">${event.purpose}</p>
+      </div>
+    `).join('');
+  }
+
   // Education list in Recruiter
   const recruiterEdu = document.getElementById('recruiter-education-container');
   recruiterEdu.innerHTML = PORTFOLIO_DATA.education.map(edu => `
@@ -191,12 +242,14 @@ function populateData() {
 
   // Certifications list in Recruiter
   const recruiterCerts = document.getElementById('recruiter-certs-container');
-  recruiterCerts.innerHTML = PORTFOLIO_DATA.certificates.map(cert => `
-    <div class="recruiter-cert-item">
-      <span>🏆 ${cert.name}</span>
-      <span class="text-secondary">${cert.issuer}</span>
-    </div>
-  `).join('');
+  if (recruiterCerts) {
+    recruiterCerts.innerHTML = PORTFOLIO_DATA.certificates.map(cert => `
+      <div class="recruiter-cert-item">
+        <span>${cert.category === 'technical' ? '🏆' : '🎗️'} ${cert.name}</span>
+        <span class="text-secondary">${cert.issuer} (${cert.date})</span>
+      </div>
+    `).join('');
+  }
 }
 
 /* --- Clock and Date synchronizations --- */
@@ -234,6 +287,7 @@ function bindEvents() {
   const shortcuts = [
     { id: 'shortcut-about', winId: 'about' },
     { id: 'shortcut-projects', winId: 'projects' },
+    { id: 'shortcut-tech-events', winId: 'tech-events' },
     { id: 'shortcut-files', winId: 'files' },
     { id: 'shortcut-askme', winId: 'askme' },
     { id: 'shortcut-certificates', winId: 'certificates' },
@@ -267,6 +321,14 @@ function bindEvents() {
   if (githubShortcut) {
     githubShortcut.addEventListener('click', () => {
       window.open(PORTFOLIO_DATA.profile.github, '_blank');
+    });
+  }
+
+  const locationShortcut = document.getElementById('shortcut-location');
+  if (locationShortcut) {
+    locationShortcut.addEventListener('click', () => {
+      const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(PORTFOLIO_DATA.profile.location)}`;
+      window.open(mapsUrl, '_blank');
     });
   }
 
@@ -409,6 +471,8 @@ function bindEvents() {
       const modal = document.getElementById('pdf-viewer-modal');
       modal.classList.add('hidden');
       document.getElementById('pdf-viewer-frame').src = '';
+      const imgEl = document.getElementById('pdf-viewer-img');
+      if (imgEl) imgEl.src = '';
     });
   }
 
@@ -434,6 +498,7 @@ function bindEvents() {
   const mobileApps = [
     { id: 'mobile-app-askme', type: 'askme' },
     { id: 'mobile-app-projects', type: 'projects' },
+    { id: 'mobile-app-tech-events', type: 'technical-events' },
     { id: 'mobile-app-files', type: 'files' },
     { id: 'mobile-app-certificates', type: 'certificates' },
     { id: 'mobile-app-creative', type: 'creative' },
@@ -637,6 +702,7 @@ function handleOSPersonalityChange(personality) {
         <span style="font-weight:600;">Sagar OS</span>
         <span class="text-secondary" style="cursor:pointer;" onclick="appManager.openWindow('about')">About</span>
         <span class="text-secondary" style="cursor:pointer;" onclick="appManager.openWindow('projects')">Projects</span>
+        <span class="text-secondary" style="cursor:pointer;" onclick="appManager.openWindow('tech-events')">Exhibitions</span>
         <span class="text-secondary" style="cursor:pointer;" onclick="appManager.openWindow('askme')">Ask Me AI</span>
       </div>
       <div id="mac-clock-area" style="font-weight:500; font-size:12px; opacity:0.8;"></div>
@@ -660,6 +726,7 @@ function handleOSPersonalityChange(personality) {
     dock.innerHTML = `
       <button class="mac-dock-item" onclick="appManager.openWindow('about')" title="About Me" style="font-size:24px;">👤</button>
       <button class="mac-dock-item" onclick="appManager.openWindow('projects')" title="Projects" style="font-size:24px;">💻</button>
+      <button class="mac-dock-item" onclick="appManager.openWindow('tech-events')" title="Technical Events & Activities" style="font-size:24px;">🏆</button>
       <button class="mac-dock-item" onclick="appManager.openWindow('files')" title="Files" style="font-size:24px;">📁</button>
       <button class="mac-dock-item" onclick="appManager.openWindow('askme')" title="Ask Me Assistant" style="font-size:24px;">🤖</button>
       <button class="mac-dock-item" onclick="appManager.openWindow('certificates')" title="Certificates" style="font-size:24px;">🏆</button>
@@ -803,10 +870,10 @@ const appManager = {
     if (!project) return;
 
     // Update active state in list
-    const listItems = document.querySelectorAll('.project-nav-item');
+    const listItems = document.querySelectorAll('#projects-sidebar-list .project-nav-item');
     listItems.forEach(item => {
       item.classList.remove('active');
-      if (item.getAttribute('onclick').includes(projId)) {
+      if (item.getAttribute('data-id') === projId) {
         item.classList.add('active');
       }
     });
@@ -827,6 +894,50 @@ const appManager = {
     let pdfBtn = '';
     if (project.pdfUrl) {
       pdfBtn = `<button onclick="appManager.previewPDF('${project.pdfUrl}', '${project.name}')" class="btn btn-primary">📄 View PDF Document</button>`;
+    }
+
+    let testCasesHtml = '';
+    if (project.testCases && project.testCases.length > 0) {
+      testCasesHtml = `
+        <div class="project-info-section" style="grid-column: 1 / -1; overflow-x:auto;">
+          <h4 style="margin-bottom:8px;">System Testing & Test Cases</h4>
+          <table style="width:100%; border-collapse:collapse; font-size:11px; text-align:left; border:1px solid var(--border-color); background-color:rgba(0,0,0,0.1);">
+            <thead>
+              <tr style="background-color:rgba(255,255,255,0.04); border-bottom:1.5px solid var(--border-color); font-weight:700;">
+                <th style="padding:6px 8px; border:1px solid var(--border-color);">Test Case</th>
+                <th style="padding:6px 8px; border:1px solid var(--border-color);">Input Data</th>
+                <th style="padding:6px 8px; border:1px solid var(--border-color);">Expected Output</th>
+                <th style="padding:6px 8px; border:1px solid var(--border-color);">Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${project.testCases.map(tc => `
+                <tr style="border-bottom:1px solid var(--border-color);">
+                  <td style="padding:6px 8px; border:1px solid var(--border-color); font-weight:600;">${tc.name}</td>
+                  <td style="padding:6px 8px; border:1px solid var(--border-color); color:var(--text-secondary);">${tc.input}</td>
+                  <td style="padding:6px 8px; border:1px solid var(--border-color); color:var(--text-secondary);">${tc.expected}</td>
+                  <td style="padding:6px 8px; border:1px solid var(--border-color); color:var(--color-emerald); font-weight:700;">${tc.result}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+    let imageGallery = '';
+    if (project.images && project.images.length > 0) {
+      imageGallery = `
+        <div class="project-info-section" style="grid-column: 1 / -1;">
+          <h4>Media & Screenshots</h4>
+          <div class="project-image-gallery" style="display:flex; gap:12px; overflow-x:auto; padding:8px 0; scrollbar-width:thin;">
+            ${project.images.map(img => `
+              <div class="gallery-image-wrapper" style="flex:0 0 140px; height:95px; border-radius:6px; overflow:hidden; border:1px solid var(--border-color); cursor:pointer; background-color:#1e1e24;" onclick="appManager.previewPDF('${img}', '${project.name} Screenshot')">
+                <img src="${img}" style="width:100%; height:100%; object-fit:cover; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Screenshot" />
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
     }
 
     detailPanel.innerHTML = `
@@ -856,12 +967,93 @@ const appManager = {
           <h4>Context & Execution</h4>
           <p>${project.description}</p>
         </div>` : ''}
+        ${testCasesHtml}
+        ${imageGallery}
       </div>
 
       <div class="project-actions">
         ${demoBtn}
         ${githubBtn}
         ${pdfBtn}
+      </div>
+    `;
+  },
+
+  selectTechnicalEvent(eventId) {
+    const event = PORTFOLIO_DATA.technicalEvents.find(e => e.id === eventId);
+    if (!event) return;
+
+    // Update active state in list
+    const listItems = document.querySelectorAll('#tech-events-sidebar-list .project-nav-item');
+    listItems.forEach(item => {
+      item.classList.remove('active');
+      if (item.getAttribute('data-id') === eventId) {
+        item.classList.add('active');
+      }
+    });
+
+    // Render detailed sheet
+    const detailPanel = document.getElementById('tech-event-detail-panel');
+    
+    let githubBtn = '';
+    if (event.github) {
+      githubBtn = `<a href="${event.github}" target="_blank" rel="noopener" class="btn btn-secondary">💻 GitHub Repo</a>`;
+    }
+
+    let pdfBtn = '';
+    if (event.pdfUrl) {
+      pdfBtn = `<button onclick="appManager.previewPDF('${event.pdfUrl}', '${event.name}')" class="btn btn-primary">📄 View Certificate</button>`;
+    }
+
+    let imageGallery = '';
+    if (event.images && event.images.length > 0) {
+      imageGallery = `
+        <div class="project-info-section" style="grid-column: 1 / -1;">
+          <h4>Media & Event Gallery</h4>
+          <div class="event-image-gallery" style="display:flex; gap:12px; overflow-x:auto; padding:8px 0; scrollbar-width:thin;">
+            ${event.images.map(img => `
+              <div class="gallery-image-wrapper" style="flex:0 0 140px; height:95px; border-radius:6px; overflow:hidden; border:1px solid var(--border-color); cursor:pointer; background-color:#1e1e24;" onclick="appManager.previewPDF('${img}', '${event.name} Photo')">
+                <img src="${img}" style="width:100%; height:100%; object-fit:cover; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Gallery Photo" />
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    detailPanel.innerHTML = `
+      <div class="project-detail-header">
+        <h2>${event.name}</h2>
+        <div class="project-detail-subtitle">${event.subtitle}</div>
+        <div class="project-detail-meta">${event.association} | Role: <strong>${event.role}</strong></div>
+      </div>
+      
+      <div class="tech-badges-container">
+        ${event.tech.map(t => `<span class="tech-badge">${t}</span>`).join('')}
+      </div>
+
+      <div class="project-info-grid">
+        <div class="project-info-section">
+          <h4>Exhibition Overview</h4>
+          <p>${event.purpose}</p>
+        </div>
+        <div class="project-info-section">
+          <h4>Highlights</h4>
+          <ul>
+            ${event.features.map(f => `<li>${f}</li>`).join('')}
+          </ul>
+        </div>
+        ${event.description ? `
+        <div class="project-info-section">
+          <h4>Event Context</h4>
+          <p>${event.description}</p>
+        </div>` : ''}
+        ${imageGallery}
+      </div>
+
+      <div class="project-actions">
+        ${pdfBtn}
+        ${githubBtn}
       </div>
     `;
   },
@@ -873,8 +1065,11 @@ const appManager = {
     // Highlight folder in sidebar
     const folders = document.getElementById('fm-side-folders');
     folders.innerHTML = `
-      <div class="fm-sub-item ${folderId === 'certs' ? 'active' : ''}" onclick="appManager.renderFileManagerFolder('certs')">🗂️ Certificates</div>
+      <div class="fm-sub-item ${folderId === 'certs' || folderId === 'certs-technical' || folderId === 'certs-events' ? 'active' : ''}" onclick="appManager.renderFileManagerFolder('certs')">🗂️ Certificates</div>
+      <div class="fm-sub-item ${folderId === 'certs-technical' ? 'active' : ''}" onclick="appManager.renderFileManagerFolder('certs-technical')" style="padding-left:24px; font-size:11.5px; opacity:0.95;">📁 Technical</div>
+      <div class="fm-sub-item ${folderId === 'certs-events' ? 'active' : ''}" onclick="appManager.renderFileManagerFolder('certs-events')" style="padding-left:24px; font-size:11.5px; opacity:0.95;">📁 Events & Activities</div>
       <div class="fm-sub-item ${folderId === 'projects' ? 'active' : ''}" onclick="appManager.renderFileManagerFolder('projects')">🗂️ Projects</div>
+      <div class="fm-sub-item ${folderId === 'technical-events' ? 'active' : ''}" onclick="appManager.renderFileManagerFolder('technical-events')">🗂️ Technical Events & Activities</div>
       <div class="fm-sub-item ${folderId === 'resume' ? 'active' : ''}" onclick="appManager.renderFileManagerFolder('resume')">🗂️ Resume</div>
       <div class="fm-sub-item ${folderId === 'docs' ? 'active' : ''}" onclick="appManager.renderFileManagerFolder('docs')">🗂️ Documents</div>
     `;
@@ -893,6 +1088,10 @@ const appManager = {
           <span class="fm-item-icon">📁</span>
           <span class="fm-item-label">Projects</span>
         </div>
+        <div class="fm-item" onclick="appManager.renderFileManagerFolder('technical-events')">
+          <span class="fm-item-icon">📁</span>
+          <span class="fm-item-label">Technical Events & Activities</span>
+        </div>
         <div class="fm-item" onclick="appManager.renderFileManagerFolder('resume')">
           <span class="fm-item-icon">📁</span>
           <span class="fm-item-label">Resume</span>
@@ -904,7 +1103,29 @@ const appManager = {
       `;
     } else if (folderId === 'certs') {
       breadcrumbs.textContent = 'C:\\Certificates';
-      viewGrid.innerHTML = PORTFOLIO_DATA.certificates.map(cert => `
+      viewGrid.innerHTML = `
+        <div class="fm-item" onclick="appManager.renderFileManagerFolder('certs-technical')" ondblclick="appManager.renderFileManagerFolder('certs-technical')">
+          <span class="fm-item-icon">📁</span>
+          <span class="fm-item-label">Technical Certificates</span>
+        </div>
+        <div class="fm-item" onclick="appManager.renderFileManagerFolder('certs-events')" ondblclick="appManager.renderFileManagerFolder('certs-events')">
+          <span class="fm-item-icon">📁</span>
+          <span class="fm-item-label">Events & Activities</span>
+        </div>
+      `;
+    } else if (folderId === 'certs-technical') {
+      breadcrumbs.textContent = 'C:\\Certificates\\Technical';
+      const techCerts = PORTFOLIO_DATA.certificates.filter(c => c.category === 'technical');
+      viewGrid.innerHTML = techCerts.map(cert => `
+        <div class="fm-item" ondblclick="appManager.previewPDF('${cert.pdfUrl}', '${cert.name}')" onclick="if(isMobile()) appManager.previewPDF('${cert.pdfUrl}', '${cert.name}')">
+          <span class="fm-item-icon">📄</span>
+          <span class="fm-item-label">${cert.name.toLowerCase().replace(/ /g, '_')}.pdf</span>
+        </div>
+      `).join('') || '<div class="text-secondary p-4">Folder is empty</div>';
+    } else if (folderId === 'certs-events') {
+      breadcrumbs.textContent = 'C:\\Certificates\\Events & Activities';
+      const eventCerts = PORTFOLIO_DATA.certificates.filter(c => c.category === 'events');
+      viewGrid.innerHTML = eventCerts.map(cert => `
         <div class="fm-item" ondblclick="appManager.previewPDF('${cert.pdfUrl}', '${cert.name}')" onclick="if(isMobile()) appManager.previewPDF('${cert.pdfUrl}', '${cert.name}')">
           <span class="fm-item-icon">📄</span>
           <span class="fm-item-label">${cert.name.toLowerCase().replace(/ /g, '_')}.pdf</span>
@@ -925,6 +1146,17 @@ const appManager = {
           </div>
         `;
       }).join('');
+    } else if (folderId === 'technical-events') {
+      breadcrumbs.textContent = 'C:\\Technical Events & Activities';
+      viewGrid.innerHTML = PORTFOLIO_DATA.technicalEvents.map(event => {
+        const action = `appManager.openWindow('tech-events'); appManager.selectTechnicalEvent('${event.id}')`;
+        return `
+          <div class="fm-item" ondblclick="${action}" onclick="if(isMobile()) ${action}">
+            <span class="fm-item-icon">🔗</span>
+            <span class="fm-item-label">${event.id}.lnk</span>
+          </div>
+        `;
+      }).join('') || '<div class="text-secondary p-4">Folder is empty</div>';
     } else if (folderId === 'resume') {
       breadcrumbs.textContent = 'C:\\Resume';
       viewGrid.innerHTML = `
@@ -950,6 +1182,7 @@ const appManager = {
   previewPDF(url, title) {
     const modal = document.getElementById('pdf-viewer-modal');
     const iframe = document.getElementById('pdf-viewer-frame');
+    const imageEl = document.getElementById('pdf-viewer-img');
     const titleEl = document.getElementById('pdf-viewer-title');
     const downloadLink = document.getElementById('pdf-modal-download');
     const fallbackLink = document.getElementById('pdf-fallback-link');
@@ -959,16 +1192,38 @@ const appManager = {
     downloadLink.href = url;
     fallbackLink.href = url;
 
-    // Load PDF
-    iframe.src = url;
-    modal.classList.remove('hidden');
+    // Check if the URL points to an image
+    const isImage = url.toLowerCase().endsWith('.jpeg') || 
+                    url.toLowerCase().endsWith('.jpg') || 
+                    url.toLowerCase().endsWith('.png') || 
+                    url.toLowerCase().endsWith('.webp') ||
+                    url.toLowerCase().endsWith('.gif');
 
-    // Simple check: if local file:/// protocol, browser security might block iframe preview
-    if (window.location.protocol === 'file:') {
-      fallbackBox.classList.remove('hidden');
-    } else {
+    if (isImage) {
+      // Show image, hide iframe & fallback
+      iframe.style.display = 'none';
+      iframe.src = '';
       fallbackBox.classList.add('hidden');
+      
+      imageEl.src = url;
+      imageEl.style.display = 'block';
+    } else {
+      // Show iframe, hide image element
+      imageEl.src = '';
+      imageEl.style.display = 'none';
+      
+      iframe.style.display = 'block';
+      iframe.src = url;
+
+      // Simple check: if local file:/// protocol, browser security might block iframe preview
+      if (window.location.protocol === 'file:') {
+        fallbackBox.classList.remove('hidden');
+      } else {
+        fallbackBox.classList.add('hidden');
+      }
     }
+
+    modal.classList.remove('hidden');
   },
 
   /* --- Chatbot Interface Handlers --- */
@@ -979,6 +1234,7 @@ const appManager = {
       { text: "Core Skills", key: "skills" },
       { text: "Experience", key: "experience" },
       { text: "Projects", key: "projects" },
+      { text: "Technical Events & Activities", key: "techEvents" },
       { text: "Education", key: "education" },
       { text: "Certifications", key: "certificates" }
     ];
@@ -1053,12 +1309,16 @@ const appManager = {
       responseKey = 'skills';
     } else if (query.includes('experience') || query.includes('intern') || query.includes('work') || query.includes('eco dispose')) {
       responseKey = 'experience';
-    } else if (query.includes('project') || query.includes('stickman') || query.includes('ambulance') || query.includes('hackathon')) {
+    } else if (query.includes('project')) {
       responseKey = 'projects';
+    } else if (query.includes('exhibition') || query.includes('technical event') || query.includes('elixir') || query.includes('stickman') || query.includes('ambulance') || query.includes('open day')) {
+      responseKey = 'techEvents';
     } else if (query.includes('ink app') || query.includes('ink')) {
       responseKey = 'ink_app';
     } else if (query.includes('research') || query.includes('paper') || query.includes('cyber') || query.includes('bengaluru')) {
       responseKey = 'research';
+    } else if (query.includes('flipkart') || query.includes('clone') || query.includes('e-commerce')) {
+      responseKey = 'flipkart_clone';
     } else if (query.includes('education') || query.includes('college') || query.includes('university') || query.includes('school')) {
       responseKey = 'education';
     } else if (query.includes('certificate') || query.includes('certif') || query.includes('infosys') || query.includes('springboard')) {
@@ -1157,6 +1417,10 @@ const appManager = {
           if (q.includes('about') || q.includes('yourself')) responseKey = 'about';
           else if (q.includes('skill') || q.includes('languages') || q.includes('stack')) responseKey = 'skills';
           else if (q.includes('experience') || q.includes('work') || q.includes('intern')) responseKey = 'experience';
+          else if (q.includes('exhibition') || q.includes('technical event') || q.includes('elixir') || q.includes('stickman') || q.includes('ambulance') || q.includes('open day')) responseKey = 'techEvents';
+          else if (q.includes('ink app') || q.includes('ink')) responseKey = 'ink_app';
+          else if (q.includes('research') || q.includes('paper') || q.includes('cyber') || q.includes('bengaluru')) responseKey = 'research';
+          else if (q.includes('flipkart') || q.includes('clone') || q.includes('e-commerce')) responseKey = 'flipkart_clone';
           else if (q.includes('project')) responseKey = 'projects';
           else if (q.includes('education') || q.includes('college')) responseKey = 'education';
           else if (q.includes('certificate') || q.includes('certif')) responseKey = 'certificates';
@@ -1174,20 +1438,70 @@ const appManager = {
       titleEl.textContent = 'Projects Explorer';
       contentEl.innerHTML = `
         <div class="p-4 scrollable" style="height:100%;">
-          ${PORTFOLIO_DATA.projects.map(proj => `
-            <div class="recruiter-section mb-4">
-              <h3 style="border-left:4px solid var(--color-orange); padding-left:8px; font-weight:700; font-size:14px;">${proj.name}</h3>
-              <p class="project-detail-subtitle mb-2" style="font-size:12px; margin-top:2px;">${proj.subtitle}</p>
-              <div class="tech-badges-container mb-3">
-                ${proj.tech.map(t => `<span class="tech-badge" style="font-size:9.5px; padding:2px 6px;">${t}</span>`).join('')}
+          ${PORTFOLIO_DATA.projects.map(proj => {
+            const githubBtn = proj.github ? `<a href="${proj.github}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="flex:1; text-align:center;">GitHub</a>` : '';
+            const pdfBtn = proj.pdfUrl ? `<button onclick="appManager.previewPDF('${proj.pdfUrl}', '${proj.name}')" class="btn btn-primary btn-sm" style="flex:1; text-align:center;">Preview PDF</button>` : '';
+            
+            let testCasesHtml = '';
+            if (proj.testCases && proj.testCases.length > 0) {
+              testCasesHtml = `
+                <div class="mb-3" style="overflow-x:auto;">
+                  <div style="font-size:10px; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">TEST CASES</div>
+                  <table style="width:100%; border-collapse:collapse; font-size:9.5px; border:1px solid var(--border-color);">
+                    <thead>
+                      <tr style="background-color:rgba(255,255,255,0.05); text-align:left; font-weight:700;">
+                        <th style="padding:4px; border:1px solid var(--border-color);">Test Case</th>
+                        <th style="padding:4px; border:1px solid var(--border-color);">Input</th>
+                        <th style="padding:4px; border:1px solid var(--border-color);">Expected</th>
+                        <th style="padding:4px; border:1px solid var(--border-color);">Result</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${proj.testCases.map(tc => `
+                        <tr style="border-bottom:1px solid var(--border-color);">
+                          <td style="padding:4px; border:1px solid var(--border-color); font-weight:600;">${tc.name}</td>
+                          <td style="padding:4px; border:1px solid var(--border-color);">${tc.input}</td>
+                          <td style="padding:4px; border:1px solid var(--border-color);">${tc.expected}</td>
+                          <td style="padding:4px; border:1px solid var(--border-color); color:var(--color-emerald); font-weight:700;">${tc.result}</td>
+                        </tr>
+                      `).join('')}
+                    </tbody>
+                  </table>
+                </div>
+              `;
+            }
+
+            let imagesHtml = '';
+            if (proj.images && proj.images.length > 0) {
+              imagesHtml = `
+                <div class="mb-3">
+                  <div style="font-size:10px; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">SCREENSHOTS</div>
+                  <div style="display:flex; gap:8px; overflow-x:auto; padding-bottom:4px;">
+                    ${proj.images.map(img => `
+                      <img src="${img}" style="width:100px; height:70px; object-fit:cover; border-radius:4px; border:1px solid var(--border-color);" onclick="appManager.previewPDF('${img}', '${proj.name} Screenshot')" />
+                    `).join('')}
+                  </div>
+                </div>
+              `;
+            }
+
+            return `
+              <div class="recruiter-section mb-5" style="border-bottom:1px solid var(--border-color); padding-bottom:16px;">
+                <h3 style="border-left:4px solid var(--color-orange); padding-left:8px; font-weight:700; font-size:14px;">${proj.name}</h3>
+                <p class="project-detail-subtitle mb-2" style="font-size:12px; margin-top:2px;">${proj.subtitle}</p>
+                <div class="tech-badges-container mb-3">
+                  ${proj.tech.map(t => `<span class="tech-badge" style="font-size:9.5px; padding:2px 6px;">${t}</span>`).join('')}
+                </div>
+                <p class="text-secondary mb-3" style="font-size:12px; line-height:1.4;">${proj.purpose}</p>
+                ${imagesHtml}
+                ${testCasesHtml}
+                <div class="project-actions" style="display:flex; gap:8px; width:100%;">
+                  ${pdfBtn}
+                  ${githubBtn}
+                </div>
               </div>
-              <p class="text-secondary mb-3" style="font-size:12px; line-height:1.4;">${proj.purpose}</p>
-              <div class="project-actions">
-                ${proj.github ? `<a href="${proj.github}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">GitHub</a>` : ''}
-                ${proj.pdfUrl ? `<button onclick="appManager.previewPDF('${proj.pdfUrl}', '${proj.name}')" class="btn btn-primary btn-sm">Preview PDF</button>` : ''}
-              </div>
-            </div>
-          `).join('')}
+            `;
+          }).join('')}
         </div>
       `;
     } else if (appType === 'files') {
@@ -1204,13 +1518,30 @@ const appManager = {
 
     } else if (appType === 'certificates') {
       titleEl.textContent = 'Certifications';
+      const techCerts = PORTFOLIO_DATA.certificates.filter(c => c.category === 'technical');
+      const eventCerts = PORTFOLIO_DATA.certificates.filter(c => c.category === 'events');
       contentEl.innerHTML = `
         <div class="p-4 scrollable" style="height:100%;">
           <div class="certificates-list-container">
-            ${PORTFOLIO_DATA.certificates.map(cert => `
-              <div class="cert-row" style="flex-direction:column; align-items:flex-start; gap:10px;">
+            <div style="font-weight:700; font-size:11px; margin-bottom:12px; color:var(--color-teal); border-bottom:1px solid var(--border-color); padding-bottom:4px;">TECHNICAL & INTERNSHIP</div>
+            ${techCerts.map(cert => `
+              <div class="cert-row" style="flex-direction:column; align-items:flex-start; gap:10px; margin-bottom:16px;">
                 <div class="cert-info">
                   <span class="cert-icon">🏆</span>
+                  <div>
+                    <div class="cert-name" style="font-size:13px;">${cert.name}</div>
+                    <div class="cert-issuer" style="font-size:11px;">${cert.issuer} (${cert.date})</div>
+                  </div>
+                </div>
+                <button class="btn btn-secondary btn-sm btn-block text-center" onclick="appManager.previewPDF('${cert.pdfUrl}', '${cert.name}')">View Certificate</button>
+              </div>
+            `).join('')}
+
+            <div style="font-weight:700; font-size:11px; margin:20px 0 12px 0; color:var(--color-emerald); border-bottom:1px solid var(--border-color); padding-bottom:4px;">EVENTS & ACTIVITIES</div>
+            ${eventCerts.map(cert => `
+              <div class="cert-row" style="flex-direction:column; align-items:flex-start; gap:10px; margin-bottom:16px;">
+                <div class="cert-info">
+                  <span class="cert-icon">🎗️</span>
                   <div>
                     <div class="cert-name" style="font-size:13px;">${cert.name}</div>
                     <div class="cert-issuer" style="font-size:11px;">${cert.issuer} (${cert.date})</div>
@@ -1231,7 +1562,7 @@ const appManager = {
             <div class="creative-card">
               <div class="creative-icon">🎬</div>
               <h4>Video Editing & AV Production</h4>
-              <p>Experienced in editing, post-production, and directing visual streams. Managed video promotions for major events.</p>
+              <p>Experienced in editing, post-production, and directing visual streams. Served as an SJU Student Council Media Volunteer (2024), handling videography and editing for inter- and intra-college events.</p>
             </div>
             <div class="creative-card">
               <div class="creative-icon">🔊</div>
@@ -1239,11 +1570,51 @@ const appManager = {
               <p>Designed live stream setups (OBS, audio mixing, multi-cam switching) for events with over 500 participants.</p>
             </div>
             <div class="creative-card">
-              <div class="creative-icon">🎮</div>
-              <h4>Interactive Mini-Games</h4>
-              <p>Built vanilla JS canvas games like the 2D Stickman game during hackathons to explore physics and loops.</p>
+              <div class="creative-icon">🎤</div>
+              <h4>NSS Community Outreach & Emcee</h4>
+              <p>Served as an emcee for small community events in rural areas, interacted with local residents, and completed hands-on sanitation and infrastructure field work (cleaning roads, drains).</p>
             </div>
           </div>
+        </div>
+      `;
+    } else if (appType === 'technical-events') {
+      titleEl.textContent = 'Exhibitions';
+      contentEl.innerHTML = `
+        <div class="p-4 scrollable" style="height:100%;">
+          ${PORTFOLIO_DATA.technicalEvents.map(event => {
+            const githubBtn = event.github ? `<a href="${event.github}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="flex:1; text-align:center;">GitHub</a>` : '';
+            const pdfBtn = event.pdfUrl ? `<button onclick="appManager.previewPDF('${event.pdfUrl}', '${event.name}')" class="btn btn-primary btn-sm" style="flex:1; text-align:center;">Certificate</button>` : '';
+            
+            let imagesHtml = '';
+            if (event.images && event.images.length > 0) {
+              imagesHtml = `
+                <div class="mb-3">
+                  <div style="font-size:11px; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">PHOTOS</div>
+                  <div style="display:flex; gap:8px; overflow-x:auto; padding-bottom:4px;">
+                    ${event.images.map(img => `
+                      <img src="${img}" style="width:100px; height:70px; object-fit:cover; border-radius:4px; border:1px solid var(--border-color);" onclick="appManager.previewPDF('${img}', '${event.name} Photo')" />
+                    `).join('')}
+                  </div>
+                </div>
+              `;
+            }
+
+            return `
+              <div class="recruiter-section mb-5" style="border-bottom:1px solid var(--border-color); padding-bottom:16px;">
+                <h3 style="border-left:4px solid var(--color-emerald); padding-left:8px; font-weight:700; font-size:14px;">${event.name}</h3>
+                <p class="project-detail-subtitle mb-2" style="font-size:12px; margin-top:2px;">${event.subtitle}</p>
+                <div class="tech-badges-container mb-3">
+                  ${event.tech.map(t => `<span class="tech-badge" style="font-size:9.5px; padding:2px 6px;">${t}</span>`).join('')}
+                </div>
+                <p class="text-secondary mb-3" style="font-size:12px; line-height:1.4;">${event.purpose}</p>
+                ${imagesHtml}
+                <div class="project-actions" style="display:flex; gap:8px; width:100%;">
+                  ${pdfBtn}
+                  ${githubBtn}
+                </div>
+              </div>
+            `;
+          }).join('')}
         </div>
       `;
     } else if (appType === 'settings') {
@@ -1316,6 +1687,10 @@ const appManager = {
           <span class="fm-item-icon">📁</span>
           <span class="fm-item-label">Projects</span>
         </div>
+        <div class="fm-item" onclick="appManager.renderMobileFileManagerFolder('technical-events')">
+          <span class="fm-item-icon">📁</span>
+          <span class="fm-item-label">Technical Events & Activities</span>
+        </div>
         <div class="fm-item" onclick="appManager.renderMobileFileManagerFolder('resume')">
           <span class="fm-item-icon">📁</span>
           <span class="fm-item-label">Resume</span>
@@ -1336,7 +1711,39 @@ const appManager = {
 
       if (folderId === 'certs') {
         breadcrumbs.textContent = 'C:\\Certificates';
-        viewGrid.innerHTML = backToRoot + PORTFOLIO_DATA.certificates.map(cert => `
+        viewGrid.innerHTML = backToRoot + `
+          <div class="fm-item" onclick="appManager.renderMobileFileManagerFolder('certs-technical')">
+            <span class="fm-item-icon">📁</span>
+            <span class="fm-item-label">Technical</span>
+          </div>
+          <div class="fm-item" onclick="appManager.renderMobileFileManagerFolder('certs-events')">
+            <span class="fm-item-icon">📁</span>
+            <span class="fm-item-label">Events & Activities</span>
+          </div>
+        `;
+      } else if (folderId === 'certs-technical') {
+        breadcrumbs.textContent = 'C:\\Certificates\\Technical';
+        const techCerts = PORTFOLIO_DATA.certificates.filter(c => c.category === 'technical');
+        viewGrid.innerHTML = `
+          <div class="fm-item" onclick="appManager.renderMobileFileManagerFolder('certs')">
+            <span class="fm-item-icon">⬅️</span>
+            <span class="fm-item-label">Back</span>
+          </div>
+        ` + techCerts.map(cert => `
+          <div class="fm-item" onclick="appManager.previewPDF('${cert.pdfUrl}', '${cert.name}')">
+            <span class="fm-item-icon">📄</span>
+            <span class="fm-item-label">${cert.name.toLowerCase().replace(/ /g, '_')}.pdf</span>
+          </div>
+        `).join('');
+      } else if (folderId === 'certs-events') {
+        breadcrumbs.textContent = 'C:\\Certificates\\Events & Activities';
+        const eventCerts = PORTFOLIO_DATA.certificates.filter(c => c.category === 'events');
+        viewGrid.innerHTML = `
+          <div class="fm-item" onclick="appManager.renderMobileFileManagerFolder('certs')">
+            <span class="fm-item-icon">⬅️</span>
+            <span class="fm-item-label">Back</span>
+          </div>
+        ` + eventCerts.map(cert => `
           <div class="fm-item" onclick="appManager.previewPDF('${cert.pdfUrl}', '${cert.name}')">
             <span class="fm-item-icon">📄</span>
             <span class="fm-item-label">${cert.name.toLowerCase().replace(/ /g, '_')}.pdf</span>
@@ -1352,6 +1759,17 @@ const appManager = {
             <div class="fm-item" onclick="${action}">
               <span class="fm-item-icon">${proj.pdfUrl ? '📄' : '🔗'}</span>
               <span class="fm-item-label">${proj.id}</span>
+            </div>
+          `;
+        }).join('');
+      } else if (folderId === 'technical-events') {
+        breadcrumbs.textContent = 'C:\\Technical Events & Activities';
+        viewGrid.innerHTML = backToRoot + PORTFOLIO_DATA.technicalEvents.map(event => {
+          const action = `appManager.openMobileApp('technical-events')`;
+          return `
+            <div class="fm-item" onclick="${action}">
+              <span class="fm-item-icon">🔗</span>
+              <span class="fm-item-label">${event.id}</span>
             </div>
           `;
         }).join('');
