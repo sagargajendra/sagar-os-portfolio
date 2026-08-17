@@ -45,9 +45,13 @@ Sagar Portfolio/
 ├── data.js           # Authoritative portfolio database & chatbot rules
 ├── README.md         # Repository documentation
 │
-└── assets/           # PDF documents and image assets
+└── assets/           # PDF credentials and multimedia assets
     ├── profile_pic.jpeg
     ├── Sagar_G_Resume.pdf
+    ├── Sagar G NSS Certificate.pdf
+    ├── SJU Elixir 2.O Certificate.pdf
+    ├── SJU Elixir 3.O Certificate.pdf
+    ├── SJU Media Volunteer Certificate.pdf
     ├── wallpaper.jpg
     ├── wallpaper_light.jpg
     ├── cert_java_beginners.pdf
@@ -55,7 +59,14 @@ Sagar Portfolio/
     ├── cert_cybersecurity_foundation.pdf
     ├── cert_cybersecurity_awareness.pdf
     ├── internship_eco_dispose.pdf
-    └── research_cybercrime_bengaluru.pdf
+    ├── research_cybercrime_bengaluru.pdf
+    │
+    └── Media/        # Event photos, leadership highlights, and screenshots
+        ├── Elixir 2.O.jpeg
+        ├── Elixir 3 (1).jpeg to Elixir 3 (7).jpeg
+        ├── INK (1).jpeg to INK (8).jpeg (screenshots)
+        ├── KS (1).jpeg to KS (12).jpeg (Kannada Sangha highlights)
+        └── NSS (1).jpeg to NSS (5).jpeg (community service highlights)
 ```
 
 ---

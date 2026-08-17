@@ -1,7 +1,7 @@
 const PORTFOLIO_DATA = {
   profile: {
     name: "Sagar G",
-    title: "Software Developer | Python & Backend-Oriented",
+    title: "Software Developer",
     subtitle: "B.Sc Mathematics & Computer Science Graduate (2026)",
     email: "sagarshadow111@gmail.com",
     phone: "+91 6361488259",
