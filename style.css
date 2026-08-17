@@ -1617,6 +1617,10 @@ body.linux-personality .win-btn-minimize { background-color: #3e3d32; }
 .recruiter-section p {
   line-height: 1.6;
   color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+.recruiter-section p:last-child {
+  margin-bottom: 0;
 }
 
 .recruiter-skills-list {
@@ -1922,3 +1926,55 @@ body.linux-personality .win-btn-minimize { background-color: #3e3d32; }
   box-shadow: 0 0 8px var(--color-green);
   animation: pulse-badge 1.8s infinite;
 }
+
+/* --- Image Fullscreen Lightbox --- */
+.about-avatar,
+.start-avatar,
+.widget-avatar,
+.recruiter-avatar,
+.mobile-profile-avatar {
+  cursor: pointer;
+  transition: transform var(--transition-speed), opacity var(--transition-speed);
+}
+
+.about-avatar:hover,
+.start-avatar:hover,
+.widget-avatar:hover,
+.recruiter-avatar:hover,
+.mobile-profile-avatar:hover {
+  opacity: 0.95;
+  transform: scale(1.02);
+}
+
+.image-lightbox-content {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+  animation: modalScaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.image-lightbox-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10001;
+  transition: background var(--transition-speed);
+}
+
+.image-lightbox-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+

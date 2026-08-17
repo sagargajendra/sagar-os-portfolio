@@ -38,6 +38,7 @@ function initSystem() {
 
   // Bind event listeners
   bindEvents();
+
 }
 
 /* --- Environment & Setup --- */
@@ -572,6 +573,39 @@ function bindEvents() {
       document.getElementById('action-sheet-modal').classList.add('hidden');
     });
   }
+
+  // Profile Picture Fullscreen Viewer (Lightbox)
+  const lightboxModal = document.getElementById('image-lightbox-modal');
+  const lightboxImg = document.getElementById('image-lightbox-src');
+  const lightboxClose = document.getElementById('lightbox-close-btn');
+
+  document.body.addEventListener('click', (e) => {
+    const avatar = e.target.closest('.about-avatar, .start-avatar, .widget-avatar, .recruiter-avatar, .mobile-profile-avatar');
+    if (avatar && lightboxModal && lightboxImg) {
+      lightboxImg.src = avatar.src;
+      lightboxModal.classList.remove('hidden');
+    }
+  });
+
+  if (lightboxClose && lightboxModal) {
+    lightboxClose.addEventListener('click', () => {
+      lightboxModal.classList.add('hidden');
+    });
+  }
+
+  if (lightboxModal) {
+    lightboxModal.addEventListener('click', (e) => {
+      if (e.target === lightboxModal) {
+        lightboxModal.classList.add('hidden');
+      }
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightboxModal && !lightboxModal.classList.contains('hidden')) {
+      lightboxModal.classList.add('hidden');
+    }
+  });
 }
 
 /* --- Drag & Resize Window Implementations --- */
@@ -1289,13 +1323,7 @@ const appManager = {
 
     setTimeout(() => {
       typingBubble.remove();
-      
-      const answer = PORTFOLIO_DATA.askMeAnswers[key] || PORTFOLIO_DATA.askMeAnswers.default;
-      const botMsg = document.createElement('div');
-      botMsg.className = 'chat-bubble chat-bubble-bot';
-      botMsg.innerHTML = parseMarkdown(answer);
-      messagesContainer.appendChild(botMsg);
-      this.scrollToBottom();
+      this.appendBotResponse(messagesContainer, key, false);
     }, 600);
   },
 
@@ -1329,19 +1357,115 @@ const appManager = {
       responseKey = 'recruiter_fit';
     } else if (query.includes('looking for') || query.includes('job') || query.includes('role')) {
       responseKey = 'looking_for';
+    } else if (query.includes('feedback') || query.includes('review') || query.includes('rating') || query.includes('suggest')) {
+      responseKey = 'feedback';
     }
 
     const messagesContainer = document.getElementById('chat-messages-container');
-    const botMsg = document.createElement('div');
-    botMsg.className = 'chat-bubble chat-bubble-bot';
-    botMsg.innerHTML = parseMarkdown(PORTFOLIO_DATA.askMeAnswers[responseKey]);
-    messagesContainer.appendChild(botMsg);
-    this.scrollToBottom();
+    this.appendBotResponse(messagesContainer, responseKey, false);
   },
 
   scrollToBottom() {
     const chatContainer = document.getElementById('chat-messages-container');
     chatContainer.scrollTop = chatContainer.scrollHeight;
+  },
+
+  appendBotResponse(container, key, isMobile) {
+    const answer = PORTFOLIO_DATA.askMeAnswers[key] || PORTFOLIO_DATA.askMeAnswers.default;
+    const botMsg = document.createElement('div');
+    botMsg.className = 'chat-bubble chat-bubble-bot';
+    
+    let html = parseMarkdown(answer);
+    
+    const buttonConfig = this.getChatActionButtonConfig(key, isMobile);
+    if (buttonConfig) {
+      html += ` <span style="cursor: pointer; color: var(--color-blue); font-weight: bold; font-size: 14px; text-decoration: none;" onclick="${buttonConfig.action}" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'" title="${buttonConfig.label}">↗</span>`;
+    }
+    
+    botMsg.innerHTML = html;
+    container.appendChild(botMsg);
+    
+    if (isMobile) {
+      container.scrollTop = container.scrollHeight;
+    } else {
+      this.scrollToBottom();
+    }
+  },
+
+  getChatActionButtonConfig(key, isMobile) {
+    const config = {
+      about: {
+        label: "Open About Candidate",
+        action: isMobile 
+          ? `document.getElementById('mobile-profile-summary').textContent = PORTFOLIO_DATA.profile.summary; document.getElementById('mobile-profile-modal').classList.remove('hidden');`
+          : `appManager.openWindow('about');`
+      },
+      skills: {
+        label: "Open Recruiter Mode (Skills)",
+        action: `toggleRecruiterMode(true);`
+      },
+      experience: {
+        label: "Open Recruiter Mode (Experience)",
+        action: `toggleRecruiterMode(true);`
+      },
+      projects: {
+        label: "Open Projects Explorer",
+        action: isMobile 
+          ? `appManager.openMobileApp('projects');`
+          : `appManager.openWindow('projects');`
+      },
+      techEvents: {
+        label: "Open Technical Events",
+        action: isMobile 
+          ? `appManager.openMobileApp('technical-events');`
+          : `appManager.openWindow('tech-events');`
+      },
+      ink_app: {
+        label: "View INK App Project",
+        action: isMobile 
+          ? `appManager.openMobileApp('projects'); setTimeout(() => { const el = document.getElementById('mob-proj-ink-app'); if(el) el.scrollIntoView({behavior: 'smooth'}); }, 300);`
+          : `appManager.openWindow('projects'); appManager.selectProject('ink-app');`
+      },
+      research: {
+        label: "View Cybersecurity Research",
+        action: isMobile 
+          ? `appManager.openMobileApp('projects'); setTimeout(() => { const el = document.getElementById('mob-proj-cybercrime-research'); if(el) el.scrollIntoView({behavior: 'smooth'}); }, 300);`
+          : `appManager.openWindow('projects'); appManager.selectProject('cybercrime-research');`
+      },
+      flipkart_clone: {
+        label: "View Flipkart Clone Project",
+        action: isMobile 
+          ? `appManager.openMobileApp('projects'); setTimeout(() => { const el = document.getElementById('mob-proj-flipkart-clone'); if(el) el.scrollIntoView({behavior: 'smooth'}); }, 300);`
+          : `appManager.openWindow('projects'); appManager.selectProject('flipkart-clone');`
+      },
+      education: {
+        label: "Open About Candidate (Education)",
+        action: isMobile 
+          ? `document.getElementById('mobile-profile-summary').textContent = PORTFOLIO_DATA.profile.summary; document.getElementById('mobile-profile-modal').classList.remove('hidden');`
+          : `appManager.openWindow('about');`
+      },
+      certificates: {
+        label: "Open Certifications",
+        action: isMobile 
+          ? `appManager.openMobileApp('certificates');`
+          : `appManager.openWindow('certificates');`
+      },
+      contact: {
+        label: "Open About Candidate (Contact Info)",
+        action: isMobile 
+          ? `document.getElementById('mobile-profile-summary').textContent = PORTFOLIO_DATA.profile.summary; document.getElementById('mobile-profile-modal').classList.remove('hidden');`
+          : `appManager.openWindow('about');`
+      },
+      recruiter_fit: {
+        label: "Open Recruiter Mode",
+        action: `toggleRecruiterMode(true);`
+      },
+      looking_for: {
+        label: "Open Recruiter Mode",
+        action: `toggleRecruiterMode(true);`
+      }
+    };
+    return config[key] || null;
   },
 
   /* ==================== MOBILE MODE LOGIC ==================== */
@@ -1425,15 +1549,11 @@ const appManager = {
           else if (q.includes('education') || q.includes('college')) responseKey = 'education';
           else if (q.includes('certificate') || q.includes('certif')) responseKey = 'certificates';
           else if (q.includes('contact') || q.includes('phone') || q.includes('email')) responseKey = 'contact';
+
           
-          const botMsg = document.createElement('div');
-          botMsg.className = 'chat-bubble chat-bubble-bot';
-          botMsg.innerHTML = parseMarkdown(PORTFOLIO_DATA.askMeAnswers[responseKey]);
-          mobMessages.appendChild(botMsg);
-          mobMessages.scrollTop = mobMessages.scrollHeight;
+          appManager.appendBotResponse(mobMessages, responseKey, true);
         }, 800);
       });
-
     } else if (appType === 'projects') {
       titleEl.textContent = 'Projects Explorer';
       contentEl.innerHTML = `
@@ -1486,7 +1606,7 @@ const appManager = {
             }
 
             return `
-              <div class="recruiter-section mb-5" style="border-bottom:1px solid var(--border-color); padding-bottom:16px;">
+              <div id="mob-proj-${proj.id}" class="recruiter-section mb-5" style="border-bottom:1px solid var(--border-color); padding-bottom:16px;">
                 <h3 style="border-left:4px solid var(--color-orange); padding-left:8px; font-weight:700; font-size:14px;">${proj.name}</h3>
                 <p class="project-detail-subtitle mb-2" style="font-size:12px; margin-top:2px;">${proj.subtitle}</p>
                 <div class="tech-badges-container mb-3">
@@ -1631,7 +1751,7 @@ const appManager = {
           <div class="settings-section">
             <h4>About SAGAR OS</h4>
             <p class="text-secondary" style="margin-top:8px;">Version 1.0.0 (Build 2026.08)</p>
-            <p class="text-secondary">Powered by HTML5, CSS3, and Vanilla JavaScript. Made with Google Antigravity.</p>
+            <p class="text-secondary">Powered by HTML5, CSS3, and Vanilla JavaScript. Made with Google Antigravity by Sagar</p>
           </div>
         </div>
       `;
@@ -1657,11 +1777,7 @@ const appManager = {
 
     setTimeout(() => {
       typing.remove();
-      const botMsg = document.createElement('div');
-      botMsg.className = 'chat-bubble chat-bubble-bot';
-      botMsg.innerHTML = parseMarkdown(PORTFOLIO_DATA.askMeAnswers[key]);
-      mobMessages.appendChild(botMsg);
-      mobMessages.scrollTop = mobMessages.scrollHeight;
+      this.appendBotResponse(mobMessages, key, true);
     }, 600);
   },
 
