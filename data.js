@@ -99,7 +99,7 @@ const PORTFOLIO_DATA = {
       subtitle: "Role-Based Social Media Mobile Application",
       association: "Academic Capstone | Eco Dispose Internship",
       tech: ["Flutter", "Dart", "Supabase", "PostgreSQL", "Provider", "RESTful APIs", "SQL", "Git"],
-      purpose: "Create a production-grade role-based social media application to connect different personas (Admin, Brand, Customer) within an ecosystem, managing distinct capabilities and real-time social feeds.",
+      purpose: "Built a 20+ screen role-based mobile application connecting Admin, Brand, and Customer users with real-time social feeds and role-specific functionality.",
       features: [
         "Production-ready 20+ screen mobile interface customized for Admin, Brand, and Customer roles.",
         "Multi-role database schema design with strict referential integrity and optimized indexes.",
@@ -142,6 +142,22 @@ const PORTFOLIO_DATA = {
         { name: "Admin Content Moderation", input: "Admin removes inappropriate reel/product", expected: "Content removed from platform", result: "Pass" },
         { name: "Logout", input: "User clicks logout button", expected: "User redirected to login screen", result: "Pass" }
       ]
+    },
+    {
+      id: "sagar-os",
+      name: "Sagar OS",
+      role: "Creator & Lead Developer",
+      subtitle: "Interactive Developer Portfolio",
+      association: "Personal Project",
+      tech: ["HTML5", "CSS3", "JavaScript", "Git/GitHub", "Vercel", "Google Antigravity"],
+      purpose: "Designed and developed an OS-inspired responsive portfolio with adaptive mobile and desktop interfaces, interactive applications, and recruiter-focused navigation.",
+      features: [
+        "Built interactive features including a portfolio assistant, project showcase, file/certificate explorer, profile widget, desktop window interactions, and Recruiter Mode.",
+        "Deployed the portfolio on Vercel with source code maintained on GitHub, using Google Antigravity as an AI-assisted development tool."
+      ],
+      description: "Designed and developed an OS-inspired responsive portfolio with adaptive mobile and desktop interfaces, interactive applications, and recruiter-focused navigation.",
+      github: "https://github.com/sagargajendra/sagar-os-portfolio",
+      demo: "https://sagar-os-portfolio.vercel.app/"
     },
     {
       id: "cybercrime-research",
@@ -375,7 +391,7 @@ const PORTFOLIO_DATA = {
 
     about: "I am Sagar G, a Software Developer and B.Sc Computer Science & Mathematics graduate from St. Joseph's University, Bengaluru (Class of 2026). I specialize in Python and backend-oriented development, but I also have hands-on experience building mobile apps in Flutter. I love solving problems, writing clean code, and working on systems and APIs.",
 
-    projects: "I have worked on several notable projects:\n\n1. **INK App**: A role-based social media app with Flutter, Provider, Supabase, and PostgreSQL. It has 20+ screens and supports three distinct user roles with Row Level Security.\n2. **Cyber Crime in Urban Bengaluru**: An academic research paper mapping cyber threat patterns to CERT-In advisories and creating a taxonomy of 12 cybercrime typologies.\n3. **Flipkart Clone**: A responsive e-commerce front-end layout mimicking the UI and structural components of Flipkart.\n\nWhich one would you like to hear more about? (Type 'INK App', 'Research Paper', or 'Flipkart Clone')",
+    projects: "I have worked on several notable projects:\n\n1. **INK App**: A 20+ screen role-based mobile application connecting Admin, Brand, and Customer users with real-time social feeds.\n2. **Sagar OS**: A premium, highly interactive personal portfolio website styled as a fully functioning operating system with responsive desktop and mobile modes.\n3. **Cyber Crime in Urban Bengaluru**: An academic research paper mapping cyber threat patterns to CERT-In advisories and creating a taxonomy of 12 cybercrime typologies.\n4. **Flipkart Clone**: A responsive e-commerce front-end layout mimicking the UI and structural components of Flipkart.\n\nWhich one would you like to hear more about? (Type 'INK App', 'Sagar OS', 'Research Paper', or 'Flipkart Clone')",
 
     techEvents: "I have participated in various technical exhibitions, leadership roles, and campus/community activities:\n\n1. **Elixir 2.0 (Open Day)**: Exhibited the Automatic Ambulance Detection System prototype as part of a team of 8.\n2. **Elixir 3.0 (Open Day)**: Exhibited the Stickman Browser Game as part of a team of 7.\n3. **NSS Annual Rural Camp**: Acted as emcee for community events, executed drainage and road sanitation tasks, and engaged in public relations.\n4. **SJU Student Council Media Volunteer**: Directed and edited multi-fest recap videos and oversaw live campus coverage.\n5. **Kannada Sangha Technical Head & Coordinator**: Led AV production/live streaming for 500+ students and coordinated 8 Technical Heads for a 20-event inter-college fest.\n\nYou can view descriptions, attached certificates, and photos for all of these inside the **Technical Events & Activities Explorer**!",
 
@@ -392,6 +408,8 @@ const PORTFOLIO_DATA = {
     recruiter_fit: "Why consider me?\n\n1. **Solid Foundation**: A degree in Mathematics & CS, bringing logical rigour to programming and database design.\n2. **Full Lifecycle Experience**: I have built and delivered a production-ready, 20+ screen app (INK App), managing everything from DB schemas to front-end state.\n3. **Self-Learner & Team Player**: Active hackathon participant, research publisher, student leader, and quick to pick up new tools (like Supabase, RLS, and AI-assisted development tools like Antigravity).",
 
     ink_app: "The **INK App** was built using Flutter, Dart, Supabase, and Provider. It's a role-based social media application that manages distinct access control for Admins, Brands, and Customers. I designed the PostgreSQL database schema, set up JWT-based authentication, and established Row Level Security (RLS) policies to make sure each role only sees their authorized data. It was presented to external faculty and praised for its technical execution.",
+
+    sagar_os: "The **Sagar OS** project is this interactive developer portfolio featuring adaptive mobile and desktop OS interfaces. Key highlights include building interactive features (a portfolio assistant, project showcase, file/certificate explorer, profile widget, desktop window interactions, and Recruiter Mode) and deploying to Vercel with code maintained on GitHub, using Google Antigravity as an AI-assisted development tool.",
 
     research: "My research paper, titled **\"Cyber Crime in Urban Bengaluru: Emerging Threats and Countermeasures\"**, analyzes cybercrime patterns (such as AI voice scams and UPI fraud) and maps them to CERT-In guidelines. I ran a survey, conducted statistical analyses to identify public security awareness gaps, and proposed strategic countermeasures.",
 

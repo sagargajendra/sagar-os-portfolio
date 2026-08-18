@@ -568,10 +568,18 @@ function bindEvents() {
     });
   }
 
-  // Mobile Recruiter app Grid Icon
-  const mobRecruiter = document.getElementById('mobile-app-recruiter');
-  if (mobRecruiter) {
-    mobRecruiter.addEventListener('click', () => toggleRecruiterMode(true));
+  // Mobile Recruiter Widget
+  const mobRecruiterWidget = document.getElementById('mobile-recruiter-widget');
+  if (mobRecruiterWidget) {
+    mobRecruiterWidget.addEventListener('click', () => toggleRecruiterMode(true));
+  }
+
+  // Mobile Resume app Grid Icon
+  const mobResume = document.getElementById('mobile-app-resume');
+  if (mobResume) {
+    mobResume.addEventListener('click', () => {
+      appManager.previewPDF(PORTFOLIO_DATA.profile.resumeUrl, "Sagar G Resume");
+    });
   }
 
   // Cancel action sheet
@@ -1345,16 +1353,18 @@ const appManager = {
       responseKey = 'skills';
     } else if (query.includes('experience') || query.includes('intern') || query.includes('work') || query.includes('eco dispose')) {
       responseKey = 'experience';
-    } else if (query.includes('project')) {
-      responseKey = 'projects';
-    } else if (query.includes('exhibition') || query.includes('technical event') || query.includes('elixir') || query.includes('stickman') || query.includes('ambulance') || query.includes('open day')) {
-      responseKey = 'techEvents';
     } else if (query.includes('ink app') || query.includes('ink')) {
       responseKey = 'ink_app';
+    } else if (query.includes('sagar os') || query.includes('sagaros') || query.includes('portfolio') || query.includes('operating system')) {
+      responseKey = 'sagar_os';
     } else if (query.includes('research') || query.includes('paper') || query.includes('cyber') || query.includes('bengaluru')) {
       responseKey = 'research';
     } else if (query.includes('flipkart') || query.includes('clone') || query.includes('e-commerce')) {
       responseKey = 'flipkart_clone';
+    } else if (query.includes('project')) {
+      responseKey = 'projects';
+    } else if (query.includes('exhibition') || query.includes('technical event') || query.includes('elixir') || query.includes('stickman') || query.includes('ambulance') || query.includes('open day')) {
+      responseKey = 'techEvents';
     } else if (query.includes('education') || query.includes('college') || query.includes('university') || query.includes('school')) {
       responseKey = 'education';
     } else if (query.includes('certificate') || query.includes('certif') || query.includes('infosys') || query.includes('springboard')) {
@@ -1433,6 +1443,12 @@ const appManager = {
         action: isMobile 
           ? `appManager.openMobileApp('projects'); setTimeout(() => { const el = document.getElementById('mob-proj-ink-app'); if(el) el.scrollIntoView({behavior: 'smooth'}); }, 300);`
           : `appManager.openWindow('projects'); appManager.selectProject('ink-app');`
+      },
+      sagar_os: {
+        label: "View Sagar OS Project",
+        action: isMobile 
+          ? `appManager.openMobileApp('projects'); setTimeout(() => { const el = document.getElementById('mob-proj-sagar-os'); if(el) el.scrollIntoView({behavior: 'smooth'}); }, 300);`
+          : `appManager.openWindow('projects'); appManager.selectProject('sagar-os');`
       },
       research: {
         label: "View Cybersecurity Research",
@@ -1627,6 +1643,7 @@ const appManager = {
           else if (q.includes('experience') || q.includes('work') || q.includes('intern')) responseKey = 'experience';
           else if (q.includes('exhibition') || q.includes('technical event') || q.includes('elixir') || q.includes('stickman') || q.includes('ambulance') || q.includes('open day')) responseKey = 'techEvents';
           else if (q.includes('ink app') || q.includes('ink')) responseKey = 'ink_app';
+          else if (q.includes('sagar os') || q.includes('sagaros') || q.includes('portfolio') || q.includes('operating system')) responseKey = 'sagar_os';
           else if (q.includes('research') || q.includes('paper') || q.includes('cyber') || q.includes('bengaluru')) responseKey = 'research';
           else if (q.includes('flipkart') || q.includes('clone') || q.includes('e-commerce')) responseKey = 'flipkart_clone';
           else if (q.includes('project')) responseKey = 'projects';

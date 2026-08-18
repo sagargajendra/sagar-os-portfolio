@@ -606,6 +606,16 @@
           <span class="mobile-app-label">Certificates</span>
         </button>
 
+        <button class="mobile-app-icon" id="mobile-app-resume" aria-label="Resume PDF">
+          <div class="mobile-app-img">
+            <svg viewBox="0 0 24 24" class="icon-svg color-red">
+              <path
+                d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+            </svg>
+          </div>
+          <span class="mobile-app-label">Resume</span>
+        </button>
+
         <button class="mobile-app-icon" id="mobile-app-creative" aria-label="Creative Corners">
           <div class="mobile-app-img">
             <svg viewBox="0 0 24 24" class="icon-svg color-pink">
@@ -616,15 +626,6 @@
           <span class="mobile-app-label">Creative</span>
         </button>
 
-        <button class="mobile-app-icon" id="mobile-app-recruiter" aria-label="Recruiter Mode">
-          <div class="mobile-app-img highlight-glow">
-            <svg viewBox="0 0 24 24" class="icon-svg color-emerald">
-              <path
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z" />
-            </svg>
-          </div>
-          <span class="mobile-app-label">Recruiter</span>
-        </button>
 
         <button class="mobile-app-icon" id="mobile-app-location" aria-label="Open Location in Maps">
           <div class="mobile-app-img">
@@ -667,6 +668,19 @@
           <span class="mobile-app-label">GitHub</span>
         </button>
 
+      </div>
+
+      <!-- Recruiter Mode Widget -->
+      <div class="mobile-widget mobile-recruiter-widget-highlight" id="mobile-recruiter-widget" role="button" aria-label="Open Recruiter Dashboard">
+        <div class="widget-avatar-wrapper">
+          <div class="widget-recruiter-icon">👔</div>
+        </div>
+        <div class="widget-details">
+          <h3>Recruiter Dashboard</h3>
+          <p>Candidate Facts in 20 Seconds</p>
+          <div class="widget-status" style="color: var(--color-emerald); font-weight: 600;">⚡ Quick Summary Mode</div>
+        </div>
+        <div class="widget-arrow">➔</div>
       </div>
 
       <!-- Mobile Bottom Dock (Recruiter Fast Access) -->

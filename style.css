@@ -218,6 +218,35 @@ a:hover {
   100% { filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.7)); }
 }
 
+.widget-recruiter-icon {
+  width: 60px;
+  height: 60px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.mobile-recruiter-widget-highlight {
+  border: 1.5px solid var(--color-emerald) !important;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.4) !important;
+  animation: recruiter-widget-pulse 2s infinite alternate !important;
+}
+
+@keyframes recruiter-widget-pulse {
+  0% {
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+    border-color: rgba(16, 185, 129, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
+    border-color: var(--color-emerald);
+  }
+}
+
 /* ==================== CORE LAYOUT SHELLS ==================== */
 .env-container {
   width: 100vw;
@@ -1522,17 +1551,6 @@ body.linux-personality .win-btn-minimize { background-color: #3e3d32; }
   overflow: hidden;
 }
 
-@media (max-width: 768px) {
-  .recruiter-grid-layout {
-    flex-direction: column;
-    overflow-y: auto;
-  }
-  .recruiter-aside {
-    width: 100% !important;
-    border-right: none !important;
-    border-bottom: 1px solid var(--border-color);
-  }
-}
 
 .recruiter-aside {
   width: 280px;
@@ -1691,6 +1709,23 @@ body.linux-personality .win-btn-minimize { background-color: #3e3d32; }
 }
 .light-theme .recruiter-cert-item {
   background: #f9fafb;
+}
+
+@media (max-width: 768px) {
+  .recruiter-grid-layout {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .recruiter-aside {
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-color);
+    overflow-y: visible;
+  }
+  .recruiter-main {
+    overflow-y: visible;
+    flex: none;
+  }
 }
 
 /* ==================== MODALS AND PREVIEWERS ==================== */
