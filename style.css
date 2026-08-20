@@ -980,6 +980,9 @@ body.linux-personality .win-btn-minimize { background-color: #3e3d32; }
   gap: 16px;
   margin-bottom: 20px;
 }
+.project-info-section {
+  min-width: 0;
+}
 .project-info-section h4 {
   font-family: var(--font-heading);
   font-size: 13.5px;
@@ -1501,6 +1504,7 @@ body.linux-personality .win-btn-minimize { background-color: #3e3d32; }
 .mobile-app-body {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* ==================== RECRUITER MODE STYLING ==================== */

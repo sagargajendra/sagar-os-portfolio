@@ -563,8 +563,12 @@ function bindEvents() {
   const mobBack = document.getElementById('mobile-app-back');
   if (mobBack) {
     mobBack.addEventListener('click', () => {
-      document.getElementById('mobile-app-overlay').classList.add('hidden');
-      state.mobileActiveApp = null;
+      if (state.mobileActiveApp === 'project-detail') {
+        appManager.openMobileApp('projects');
+      } else {
+        document.getElementById('mobile-app-overlay').classList.add('hidden');
+        state.mobileActiveApp = null;
+      }
     });
   }
 
@@ -1441,25 +1445,25 @@ const appManager = {
       ink_app: {
         label: "View INK App Project",
         action: isMobile 
-          ? `appManager.openMobileApp('projects'); setTimeout(() => { const el = document.getElementById('mob-proj-ink-app'); if(el) el.scrollIntoView({behavior: 'smooth'}); }, 300);`
+          ? `appManager.openMobileProjectDetails('ink-app');`
           : `appManager.openWindow('projects'); appManager.selectProject('ink-app');`
       },
       sagar_os: {
         label: "View Sagar OS Project",
         action: isMobile 
-          ? `appManager.openMobileApp('projects'); setTimeout(() => { const el = document.getElementById('mob-proj-sagar-os'); if(el) el.scrollIntoView({behavior: 'smooth'}); }, 300);`
+          ? `appManager.openMobileProjectDetails('sagar-os');`
           : `appManager.openWindow('projects'); appManager.selectProject('sagar-os');`
       },
       research: {
         label: "View Cybersecurity Research",
         action: isMobile 
-          ? `appManager.openMobileApp('projects'); setTimeout(() => { const el = document.getElementById('mob-proj-cybercrime-research'); if(el) el.scrollIntoView({behavior: 'smooth'}); }, 300);`
+          ? `appManager.openMobileProjectDetails('cybercrime-research');`
           : `appManager.openWindow('projects'); appManager.selectProject('cybercrime-research');`
       },
       flipkart_clone: {
         label: "View Flipkart Clone Project",
         action: isMobile 
-          ? `appManager.openMobileApp('projects'); setTimeout(() => { const el = document.getElementById('mob-proj-flipkart-clone'); if(el) el.scrollIntoView({behavior: 'smooth'}); }, 300);`
+          ? `appManager.openMobileProjectDetails('flipkart-clone');`
           : `appManager.openWindow('projects'); appManager.selectProject('flipkart-clone');`
       },
       education: {
@@ -1520,11 +1524,7 @@ const appManager = {
     } else if (type === 'projects') {
       if (itemId) {
         if (isMob) {
-          appManager.openMobileApp('projects');
-          setTimeout(() => {
-            const el = document.getElementById(`mob-proj-${itemId}`);
-            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }, 300);
+          appManager.openMobileProjectDetails(itemId);
         } else {
           appManager.openWindow('projects');
           appManager.selectProject(itemId);
@@ -1658,71 +1658,27 @@ const appManager = {
     } else if (appType === 'projects') {
       titleEl.textContent = 'Projects Explorer';
       contentEl.innerHTML = `
-        <div class="p-4 scrollable" style="height:100%;">
-          ${PORTFOLIO_DATA.projects.map(proj => {
-            const githubBtn = proj.github ? `<a href="${proj.github}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="flex:1; text-align:center;">GitHub</a>` : '';
-            const pdfBtn = proj.pdfUrl ? `<button onclick="appManager.previewPDF('${proj.pdfUrl}', '${proj.name}')" class="btn btn-primary btn-sm" style="flex:1; text-align:center;">Preview PDF</button>` : '';
-            
-            let testCasesHtml = '';
-            if (proj.testCases && proj.testCases.length > 0) {
-              testCasesHtml = `
-                <div class="mb-3" style="overflow-x:auto;">
-                  <div style="font-size:10px; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">TEST CASES</div>
-                  <table style="width:100%; border-collapse:collapse; font-size:9.5px; border:1px solid var(--border-color);">
-                    <thead>
-                      <tr style="background-color:rgba(255,255,255,0.05); text-align:left; font-weight:700;">
-                        <th style="padding:4px; border:1px solid var(--border-color);">Test Case</th>
-                        <th style="padding:4px; border:1px solid var(--border-color);">Input</th>
-                        <th style="padding:4px; border:1px solid var(--border-color);">Expected</th>
-                        <th style="padding:4px; border:1px solid var(--border-color);">Result</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      ${proj.testCases.map(tc => `
-                        <tr style="border-bottom:1px solid var(--border-color);">
-                          <td style="padding:4px; border:1px solid var(--border-color); font-weight:600;">${tc.name}</td>
-                          <td style="padding:4px; border:1px solid var(--border-color);">${tc.input}</td>
-                          <td style="padding:4px; border:1px solid var(--border-color);">${tc.expected}</td>
-                          <td style="padding:4px; border:1px solid var(--border-color); color:var(--color-emerald); font-weight:700;">${tc.result}</td>
-                        </tr>
-                      `).join('')}
-                    </tbody>
-                  </table>
-                </div>
-              `;
-            }
-
-            let imagesHtml = '';
-            if (proj.images && proj.images.length > 0) {
-              imagesHtml = `
-                <div class="mb-3">
-                  <div style="font-size:10px; font-weight:600; color:var(--text-secondary); margin-bottom:6px;">SCREENSHOTS</div>
-                  <div style="display:flex; gap:8px; overflow-x:auto; padding-bottom:4px;">
-                    ${proj.images.map(img => `
-                      <img src="${img}" style="width:100px; height:70px; object-fit:cover; border-radius:4px; border:1px solid var(--border-color);" onclick="appManager.previewPDF('${img}', '${proj.name} Screenshot')" />
-                    `).join('')}
+        <div class="p-4 scrollable" style="height:100%; overflow-x:hidden;">
+          <div style="font-size:12px; color:var(--text-secondary); margin-bottom:16px; line-height:1.4;">
+            Tap on any project below to view its key features, screenshots, context, and system test cases.
+          </div>
+          <div class="mobile-projects-list" style="display:flex; flex-direction:column; gap:16px;">
+            ${PORTFOLIO_DATA.projects.map(proj => `
+              <div class="recruiter-section" style="margin-bottom:0; padding:16px; cursor:pointer;" onclick="appManager.openMobileProjectDetails('${proj.id}')">
+                <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+                  <div style="flex:1; padding-right:12px;">
+                    <h3 style="border-left:4px solid var(--color-orange); padding-left:8px; font-weight:700; font-size:14px; margin-bottom:2px; color:var(--text-primary);">${proj.name}</h3>
+                    <div style="font-size:11.5px; font-weight:500; color:var(--text-secondary); margin-bottom:4px;">${proj.subtitle}</div>
+                    <div style="font-size:10.5px; color:var(--text-secondary);">${proj.association}</div>
                   </div>
+                  <div style="font-size:18px; color:var(--color-orange); font-weight:bold;">➔</div>
                 </div>
-              `;
-            }
-
-            return `
-              <div id="mob-proj-${proj.id}" class="recruiter-section mb-5" style="border-bottom:1px solid var(--border-color); padding-bottom:16px;">
-                <h3 style="border-left:4px solid var(--color-orange); padding-left:8px; font-weight:700; font-size:14px;">${proj.name}</h3>
-                <p class="project-detail-subtitle mb-2" style="font-size:12px; margin-top:2px;">${proj.subtitle}</p>
-                <div class="tech-badges-container mb-3">
-                  ${proj.tech.map(t => `<span class="tech-badge" style="font-size:9.5px; padding:2px 6px;">${t}</span>`).join('')}
-                </div>
-                <p class="text-secondary mb-3" style="font-size:12px; line-height:1.4;">${proj.purpose}</p>
-                ${imagesHtml}
-                ${testCasesHtml}
-                <div class="project-actions" style="display:flex; gap:8px; width:100%;">
-                  ${pdfBtn}
-                  ${githubBtn}
+                <div class="tech-badges-container" style="margin-bottom:0; margin-top:10px; gap:4px;">
+                  ${proj.tech.map(t => `<span class="tech-badge" style="font-size:9px; padding:1px 4px;">${t}</span>`).join('')}
                 </div>
               </div>
-            `;
-          }).join('')}
+            `).join('')}
+          </div>
         </div>
       `;
     } else if (appType === 'files') {
@@ -1882,6 +1838,127 @@ const appManager = {
     }, 600);
   },
 
+  openMobileProjectDetails(projId) {
+    const project = PORTFOLIO_DATA.projects.find(p => p.id === projId);
+    if (!project) return;
+
+    state.mobileActiveApp = 'project-detail';
+    const overlay = document.getElementById('mobile-app-overlay');
+    const titleEl = document.getElementById('mobile-app-title');
+    const contentEl = document.getElementById('mobile-app-content');
+
+    overlay.classList.remove('hidden');
+    titleEl.textContent = project.name;
+
+    const demoBtn = project.demo ? `<a href="${project.demo}" target="_blank" rel="noopener" class="btn btn-primary btn-sm" style="flex:1; text-align:center; min-width:100px;">🌐 Live Demo</a>` : '';
+    const githubBtn = project.github ? `<a href="${project.github}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm" style="flex:1; text-align:center; min-width:100px;">💻 GitHub</a>` : '';
+    const pdfBtn = project.pdfUrl ? `<button onclick="appManager.previewPDF('${project.pdfUrl}', '${project.name}')" class="btn btn-primary btn-sm" style="flex:1; text-align:center; min-width:100px;">📄 Preview PDF</button>` : '';
+    
+    let featuresHtml = '';
+    if (project.features && project.features.length > 0) {
+      featuresHtml = `
+        <div class="project-info-section">
+          <h4>Key Features</h4>
+          <ul>
+            ${project.features.map(f => `<li>${f}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+    }
+
+    let descriptionHtml = '';
+    if (project.description) {
+      descriptionHtml = `
+        <div class="project-info-section">
+          <h4>Context & Execution</h4>
+          <p>${project.description}</p>
+        </div>
+      `;
+    }
+
+    let testCasesHtml = '';
+    if (project.testCases && project.testCases.length > 0) {
+      testCasesHtml = `
+        <div class="project-info-section" style="overflow-x:auto; width:100%;">
+          <h4>System Testing & Test Cases</h4>
+          <table style="width:100%; border-collapse:collapse; font-size:10px; text-align:left; border:1px solid var(--border-color); background-color:rgba(0,0,0,0.1);">
+            <thead>
+              <tr style="background-color:rgba(255,255,255,0.04); border-bottom:1.5px solid var(--border-color); font-weight:700;">
+                <th style="padding:6px 8px; border:1px solid var(--border-color);">Test Case</th>
+                <th style="padding:6px 8px; border:1px solid var(--border-color);">Input</th>
+                <th style="padding:6px 8px; border:1px solid var(--border-color);">Expected</th>
+                <th style="padding:6px 8px; border:1px solid var(--border-color);">Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${project.testCases.map(tc => `
+                <tr style="border-bottom:1px solid var(--border-color);">
+                  <td style="padding:6px 8px; border:1px solid var(--border-color); font-weight:600;">${tc.name}</td>
+                  <td style="padding:6px 8px; border:1px solid var(--border-color); color:var(--text-secondary);">${tc.input}</td>
+                  <td style="padding:6px 8px; border:1px solid var(--border-color); color:var(--text-secondary);">${tc.expected}</td>
+                  <td style="padding:6px 8px; border:1px solid var(--border-color); color:var(--color-emerald); font-weight:700;">${tc.result}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    let imagesHtml = '';
+    if (project.images && project.images.length > 0) {
+      imagesHtml = `
+        <div class="project-info-section">
+          <h4>Media & Screenshots</h4>
+          <div class="project-image-gallery" style="display:flex; gap:10px; overflow-x:auto; padding:4px 0; scrollbar-width:thin;">
+            ${project.images.map(img => `
+              <div class="gallery-image-wrapper" style="flex:0 0 120px; height:80px; border-radius:4px; overflow:hidden; border:1px solid var(--border-color); cursor:pointer; background-color:#1e1e24;" onclick="appManager.previewPDF('${img}', '${project.name} Screenshot')">
+                <img src="${img}" style="width:100%; height:100%; object-fit:cover;" alt="Screenshot" />
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    contentEl.innerHTML = `
+      <div class="p-4 scrollable" style="height:100%; overflow-x:hidden;">
+        <button class="btn btn-secondary btn-sm mb-4" onclick="appManager.openMobileApp('projects')" style="display:inline-flex; align-items:center; gap:6px; margin-bottom:16px;">
+          ⬅️ Back to Projects List
+        </button>
+
+        <div class="recruiter-section" style="border-bottom:none; padding:20px; margin-bottom:16px;">
+          <div class="project-detail-header" style="margin-bottom:12px;">
+            <h3 style="border-left:4px solid var(--color-orange); padding-left:8px; font-weight:700; font-size:15px; margin-bottom:4px; color:var(--text-primary);">${project.name}</h3>
+            <div class="project-detail-subtitle" style="font-size:12px; font-weight:500; margin-bottom:2px;">${project.subtitle}</div>
+            <div class="project-detail-meta" style="font-size:11px; color:var(--text-secondary); margin-bottom:0;">${project.association} | Role: <strong>${project.role}</strong></div>
+          </div>
+          
+          <div class="tech-badges-container mb-3" style="margin-bottom:16px;">
+            ${project.tech.map(t => `<span class="tech-badge" style="font-size:9.5px; padding:2px 6px;">${t}</span>`).join('')}
+          </div>
+
+          <div class="project-info-grid">
+            <div class="project-info-section">
+              <h4>Purpose & Overview</h4>
+              <p style="margin:0;">${project.purpose}</p>
+            </div>
+            ${featuresHtml}
+            ${descriptionHtml}
+            ${testCasesHtml}
+            ${imagesHtml}
+          </div>
+
+          <div class="project-actions" style="display:flex; flex-wrap:wrap; gap:8px; width:100%; margin-top:16px;">
+            ${demoBtn}
+            ${pdfBtn}
+            ${githubBtn}
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
   changeThemeMobile(theme, btnEl) {
     const buttons = btnEl.parentNode.querySelectorAll('button');
     buttons.forEach(b => b.classList.remove('btn-primary'));
@@ -1969,12 +2046,10 @@ const appManager = {
       } else if (folderId === 'projects') {
         breadcrumbs.textContent = 'C:\\Projects';
         viewGrid.innerHTML = backToRoot + PORTFOLIO_DATA.projects.map(proj => {
-          const action = proj.pdfUrl 
-            ? `appManager.previewPDF('${proj.pdfUrl}', '${proj.name}')` 
-            : `appManager.openMobileApp('projects')`;
+          const action = `appManager.openMobileProjectDetails('${proj.id}')`;
           return `
             <div class="fm-item" onclick="${action}">
-              <span class="fm-item-icon">${proj.pdfUrl ? '📄' : '🔗'}</span>
+              <span class="fm-item-icon">🔗</span>
               <span class="fm-item-label">${proj.id}</span>
             </div>
           `;
